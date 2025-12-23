@@ -1,9 +1,6 @@
 # Neovim plugins and cache
 lazy-lock.json
 
-# LSP and Mason
-lsp/
-
 # Temporary files
 *.swp
 *.swo
