@@ -1,0 +1,115 @@
+return {
+	"monaqa/dial.nvim",
+	-- 懒加载：只有当按下以下按键时才加载插件
+	keys = {
+		{
+			"<C-a>",
+			function()
+				require("dial.map").manipulate("increment", "normal")
+			end,
+			mode = "n",
+			desc = "Increment",
+		},
+		{
+			"<C-x>",
+			function()
+				require("dial.map").manipulate("decrement", "normal")
+			end,
+			mode = "n",
+			desc = "Decrement",
+		},
+		{
+			"g<C-a>",
+			function()
+				require("dial.map").manipulate("increment", "gnormal")
+			end,
+			mode = "n",
+			desc = "Increment (G)",
+		},
+		{
+			"g<C-x>",
+			function()
+				require("dial.map").manipulate("decrement", "gnormal")
+			end,
+			mode = "n",
+			desc = "Decrement (G)",
+		},
+		{
+			"<C-a>",
+			function()
+				require("dial.map").manipulate("increment", "visual")
+			end,
+			mode = "v",
+			desc = "Increment",
+		},
+		{
+			"<C-x>",
+			function()
+				require("dial.map").manipulate("decrement", "visual")
+			end,
+			mode = "v",
+			desc = "Decrement",
+		},
+		{
+			"g<C-a>",
+			function()
+				require("dial.map").manipulate("increment", "gvisual")
+			end,
+			mode = "v",
+			desc = "Increment (G)",
+		},
+		{
+			"g<C-x>",
+			function()
+				require("dial.map").manipulate("decrement", "gvisual")
+			end,
+			mode = "v",
+			desc = "Decrement (G)",
+		},
+	},
+	config = function()
+		local augend = require("dial.augend")
+		require("dial.config").augends:register_group({
+			-- 默认组：这里定义了你想支持哪些类型的转换
+			default = {
+				-- 1. 基础数字
+				augend.integer.alias.decimal, -- 十进制 (0, 1, 2...)
+				augend.integer.alias.hex, -- 十六进制 (0x1f, 0xA...)
+
+				-- 2. 日期和时间 (非常实用)
+				augend.date.alias["%Y/%m/%d"], -- 2023/12/23
+				augend.date.alias["%Y-%m-%d"], -- 2023-12-23 (写日志/注释常用)
+				augend.date.alias["%H:%M"], -- 14:30
+
+				-- 3. 编程逻辑常量
+				augend.constant.alias.bool, -- true <-> false (支持 Python True/False)
+
+				-- 4. 逻辑运算符 (写 C++/Rust 时的神器)
+				augend.constant.new({
+					elements = { "&&", "||" },
+					word = false, -- 不需要完全匹配单词，符号也可以
+					cyclic = true, -- 循环切换
+				}),
+
+				-- 5. 声明关键字 (JS/TS/Rust 常用)
+				augend.constant.new({
+					elements = { "let", "const" },
+					word = true,
+					cyclic = true,
+				}),
+
+				-- 6. CSS 颜色 (Web 开发神器)
+				-- 可以在 #ffffff 和 #000000 之间增加/减少数值
+				augend.hexcolor.new({
+					case = "lower",
+				}),
+
+				-- 7. 大小写转换 (可选)
+				augend.case.new({
+					types = { "camelCase", "snake_case", "PascalCase", "SCREAMING_SNAKE_CASE" },
+					cyclic = true,
+				}),
+			},
+		})
+	end,
+}
