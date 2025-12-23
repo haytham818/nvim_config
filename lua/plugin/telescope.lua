@@ -5,10 +5,10 @@ return {
 		"nvim-tree/nvim-web-devicons",
 		"nvim-telescope/telescope-ui-select.nvim",
 		-- FZF native for better performance
-		{
-			"nvim-telescope/telescope-fzf-native.nvim",
-			build = "make",
-		},
+		-- {
+		-- 	"nvim-telescope/telescope-fzf-native.nvim",
+		-- 	build = "make",
+		-- },
 	},
 	config = function()
 		local telescope = require("telescope")
@@ -71,18 +71,18 @@ return {
 						previewer = true,
 					}),
 				},
-				fzf = {
-					fuzzy = true, -- false will only do exact matching
-					override_generic_sorter = true, -- override the generic sorter
-					override_file_sorter = true, -- override the file sorter
-					case_mode = "smart_case", -- or "ignore_case" or "respect_case"
-				},
+				-- fzf = {
+				-- 	fuzzy = true, -- false will only do exact matching
+				-- 	override_generic_sorter = true, -- override the generic sorter
+				-- 	override_file_sorter = true, -- override the file sorter
+				-- 	case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+				-- },
 			},
 		})
 
 		-- 3. 關鍵步驟：加載擴充功能
 		-- 必須在 setup() 之後調用
 		telescope.load_extension("ui-select")
-		telescope.load_extension("fzf")
+		-- telescope.load_extension("fzf")
 	end,
 }
