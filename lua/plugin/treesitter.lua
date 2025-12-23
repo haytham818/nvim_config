@@ -20,9 +20,23 @@ return {
 				"dockerfile", -- Docker
 				"json",
 				"yaml",
+				"toml",
 				"cmake", -- C++ 项目常用
 				"glsl",
 				"python",
+				-- Web development
+				"html",
+				"css",
+				"javascript",
+				"typescript",
+				"tsx",
+				-- Data formats
+				"xml",
+				"diff",
+				"git_config",
+				"git_rebase",
+				"gitcommit",
+				"gitignore",
 			},
 
 			-- 2. 同步安装 (false 表示异步，防止卡顿)

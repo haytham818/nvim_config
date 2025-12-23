@@ -1,6 +1,6 @@
 -- 1. 设置 hover 的触发时间（毫秒）
 -- 默认是 4000ms (4秒)，太慢了，建议设为 300ms 或 500ms
-vim.opt.updatetime = 500
+vim.opt.updatetime = 300
 
 -- 2. 创建自动命令：当光标停留时打开诊断浮窗
 vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {

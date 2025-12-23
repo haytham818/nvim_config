@@ -1,0 +1,18 @@
+# Neovim plugins and cache
+lazy-lock.json
+
+# LSP and Mason
+lsp/
+
+# Temporary files
+*.swp
+*.swo
+*.swn
+*~
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

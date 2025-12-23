@@ -70,12 +70,17 @@ return {
 				draw = {
 					treesitter = { "lsp" },
 				},
+				border = "rounded",
 			},
 			-- Show completions after typing a trigger character, defined by the source
 			trigger = { show_on_trigger_character = true },
 			documentation = {
 				-- Show documentation automatically
 				auto_show = true,
+				auto_show_delay_ms = 200,
+				window = {
+					border = "rounded",
+				},
 			},
 			accept = {
 				auto_brackets = {
@@ -85,7 +90,12 @@ return {
 		},
 
 		-- Signature help when tying
-		signature = { enabled = true },
+		signature = {
+			enabled = true,
+			window = {
+				border = "rounded",
+			},
+		},
 	},
 	opts_extend = { "sources.default" },
 }

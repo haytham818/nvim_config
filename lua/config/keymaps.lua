@@ -25,6 +25,23 @@ vim.keymap.set("n", "<C-Down>", ":resize +2<CR>", opts)
 vim.keymap.set("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
+-- Better buffer navigation
+vim.keymap.set("n", "<S-l>", ":bnext<CR>", opts)
+vim.keymap.set("n", "<S-h>", ":bprevious<CR>", opts)
+
+-- Close buffer without closing window
+vim.keymap.set("n", "<leader>bd", ":bdelete<CR>", { desc = "Delete buffer" })
+
+-- Clear search highlights
+vim.keymap.set("n", "<Esc>", ":noh<CR>", opts)
+
+-- Better paste (don't yank replaced text)
+vim.keymap.set("v", "p", '"_dP', opts)
+
+-- Move text up and down
+vim.keymap.set("n", "<A-j>", ":m .+1<CR>==", opts)
+vim.keymap.set("n", "<A-k>", ":m .-2<CR>==", opts)
+
 -----------------
 -- Visual mode --
 -----------------
@@ -33,6 +50,11 @@ vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 vim.keymap.set("v", "<", "<gv", opts)
 vim.keymap.set("v", ">", ">gv", opts)
 
+-- Move text up and down
+vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", opts)
+vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", opts)
+
+-- Save files
 -- Normal 模式下按 Ctrl+s 保存
 vim.keymap.set("n", "<C-s>", "<cmd>w<cr>", { desc = "Save file" })
 
@@ -42,3 +64,16 @@ vim.keymap.set("i", "<C-s>", "<C-o>:w<cr>", { desc = "Save file" })
 
 -- (可选) 如果你也想支持 Visual 模式
 vim.keymap.set("v", "<C-s>", "<cmd>w<cr>", { desc = "Save file" })
+
+-- Better split navigation
+vim.keymap.set("n", "<leader>sv", ":vsplit<CR>", { desc = "Split vertically" })
+vim.keymap.set("n", "<leader>sh", ":split<CR>", { desc = "Split horizontally" })
+vim.keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" })
+vim.keymap.set("n", "<leader>sx", ":close<CR>", { desc = "Close current split" })
+
+-- Diagnostic keymaps
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
+vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Open diagnostic float" })
+vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic list" })
+
