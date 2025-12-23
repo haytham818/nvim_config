@@ -86,7 +86,7 @@ vim.lsp.enable({
 	"stylua",
 	"rust_analyzer",
 	"lua_ls",
-	-- "html",
-	-- "cssls",
-	-- "emmet_language_server",
+	"html",
+	"cssls",
+	"emmet_language_server",
 })
