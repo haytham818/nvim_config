@@ -2,6 +2,15 @@
 
 ## 和Neovim战斗数天，最终在G大人的帮助下勉强战胜
 
+### ✨ 最新改进 (Recent Improvements)
+
+- ✅ **跨平台兼容性**: 自动检测并配置 PowerShell (Windows) 或默认 shell
+- ✅ **完善的 LSP 集成**: Mason + Mason-LSPConfig 自动安装和配置 LSP 服务器
+- ✅ **增强的键位映射**: 添加了缓冲区导航、分屏管理、诊断导航等实用快捷键
+- ✅ **性能优化**: Telescope 集成 fzf-native 扩展，提升搜索性能
+- ✅ **更好的编辑体验**: 持久化撤销、智能缩进、滚动偏移等配置优化
+- ✅ **自动格式化控制**: 添加 `:FormatToggle` 命令快速开关自动格式化
+
 ### 📦 插件列表 (Plugin List)
 
 #### 🎨 UI 与外观 (UI & Aesthetics)
@@ -62,6 +71,62 @@
 | **Lazygit.nvim**     | [Config](lua/plugin/lazygit.lua)     | [Github](https://github.com/kdheepak/lazygit.nvim)   | 在 Neovim 中集成 LazyGit |
 | **Toggleterm.nvim**  | [Config](lua/plugin/terminal.lua)    | [Github](https://github.com/akinsho/toggleterm.nvim) | 快速打开/隐藏浮动终端    |
 | **Persistence.nvim** | [Config](lua/plugin/persistence.lua) | [Github](https://github.com/folke/persistence.nvim)  | 自动保存和恢复编辑会话   |
+
+---
+
+### ⚙️ 核心功能特性 (Key Features)
+
+#### LSP 配置
+- 自动安装常用 LSP 服务器（lua_ls, clangd, rust_analyzer, pyright, taplo）
+- 为每个语言服务器提供优化配置
+- Inlay Hints 支持（可通过 `<leader>th` 切换）
+- 智能诊断信息显示（300ms 延迟）
+- 完整的 LSP 快捷键：
+  - `gd`: 跳转到定义
+  - `gD`: 跳转到声明
+  - `gi`: 跳转到实现
+  - `gr`: 查看引用
+  - `K`: 显示悬停文档
+  - `<leader>ca`: 代码操作
+  - `<space>rn`: 重命名符号
+
+#### 代码补全
+- 基于 Rust 的高性能补全引擎 (blink.cmp)
+- 集成 LSP、snippets、buffer 和 path 补全源
+- 智能括号自动补全
+- 实时函数签名提示
+- Super-tab 模式（Tab 接受补全）
+
+#### 代码格式化
+- 支持多种语言格式化器
+- 保存时自动格式化
+- 使用 `:FormatToggle` 快速开关自动格式化
+- 手动格式化快捷键：`<leader>cf`
+
+#### 编辑增强
+- 自动保存（失去焦点时）
+- 持久化撤销历史
+- 智能相对行号（插入模式切换为绝对行号）
+- Treesitter 语法高亮和智能缩进
+- 增量选择（`<CR>` 扩大选区，`<BS>` 缩小选区）
+
+#### 导航和搜索
+- Telescope 模糊查找（集成 fzf-native 优化性能）
+  - `<leader>ff`: 查找文件
+  - `<leader>fg`: 全局搜索
+  - `<leader>fb`: 查找缓冲区
+  - `<leader>fh`: 搜索帮助文档
+- Neo-tree 文件浏览器（`<leader>e` 切换）
+- Flash 快速跳转
+- Grapple 文件标记系统
+
+#### 实用快捷键
+- 窗口导航：`Ctrl+h/j/k/l`
+- 缓冲区切换：`Shift+h/l`
+- 分屏管理：`<leader>sv/sh/se/sx`
+- 诊断导航：`[d/]d`
+- 保存文件：`Ctrl+s`（Normal/Insert/Visual 模式）
+- 移动文本：`Alt+j/k`（Normal/Visual 模式）
 
 ---
 
