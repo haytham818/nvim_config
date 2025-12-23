@@ -66,7 +66,7 @@ return {
 
 		-- Add command to toggle format on save
 		vim.api.nvim_create_user_command("FormatToggle", function()
-			vim.g.disable_autoformat = not vim.g.disable_autoformat
+			vim.g.disable_autoformat = not (vim.g.disable_autoformat or false)
 			if vim.g.disable_autoformat then
 				vim.notify("Format on save disabled", vim.log.levels.INFO)
 			else
