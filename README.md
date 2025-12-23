@@ -63,7 +63,6 @@
 | **Toggleterm.nvim**  | [Config](lua/plugin/terminal.lua)    | [Github](https://github.com/akinsho/toggleterm.nvim) | 快速打开/隐藏浮动终端    |
 | **Persistence.nvim** | [Config](lua/plugin/persistence.lua) | [Github](https://github.com/folke/persistence.nvim)  | 自动保存和恢复编辑会话   |
 
----
 
 **其他可选主题 (Installed Themes):**
 

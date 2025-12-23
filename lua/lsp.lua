@@ -15,6 +15,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		keymap.set("n", "gr", lsp.buf.references, bufopts)
 		keymap.set("n", "gd", lsp.buf.definition, bufopts)
+		keymap.set("n", "gD", lsp.buf.declaration, bufopts)
+		keymap.set("n", "gi", lsp.buf.implementation, bufopts)
 		keymap.set("n", "<space>rn", lsp.buf.rename, bufopts)
 		keymap.set("n", "K", lsp.buf.hover, bufopts)
 		-- use conform.nvim
@@ -31,7 +33,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(ev)
 		-- 开启 Inlay Hints
 		local client = vim.lsp.get_client_by_id(ev.data.client_id)
-		if client.server_capabilities.inlayHintProvider then
+		if client and client.server_capabilities.inlayHintProvider then
 			vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
 		end
 		vim.keymap.set("n", "<leader>th", function()
@@ -53,6 +55,7 @@ vim.diagnostic.config({
 	signs = true, -- 在行号左侧显示图标
 	underline = true,
 	update_in_insert = false, -- 输入时不要一直闪烁报错，退出插入模式再报错
+	severity_sort = true, -- Sort diagnostics by severity
 })
 
 -- 修改左侧行号栏的错误图标 (需要 Nerd Font)
