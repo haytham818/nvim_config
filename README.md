@@ -2,15 +2,6 @@
 
 ## 和Neovim战斗数天，最终在G大人的帮助下勉强战胜
 
-### ✨ 最新改进 (Recent Improvements)
-
-- ✅ **跨平台兼容性**: 自动检测并配置 PowerShell (Windows) 或默认 shell
-- ✅ **完善的 LSP 集成**: Mason + Mason-LSPConfig 自动安装和配置 LSP 服务器
-- ✅ **增强的键位映射**: 添加了缓冲区导航、分屏管理、诊断导航等实用快捷键
-- ✅ **性能优化**: Telescope 集成 fzf-native 扩展，提升搜索性能
-- ✅ **更好的编辑体验**: 持久化撤销、智能缩进、滚动偏移等配置优化
-- ✅ **自动格式化控制**: 添加 `:FormatToggle` 命令快速开关自动格式化
-
 ### 📦 插件列表 (Plugin List)
 
 #### 🎨 UI 与外观 (UI & Aesthetics)
