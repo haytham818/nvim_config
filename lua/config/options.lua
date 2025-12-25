@@ -18,7 +18,10 @@ vim.opt.splitright = true -- open new horizontal splits right
 vim.opt.termguicolors = true -- enable 24-bit RGB color in the TUI
 vim.opt.showmode = false -- we are experienced, wo don't need the "-- INSERT --" mode hint
 vim.opt.signcolumn = "yes" -- always show sign column to prevent text shifting
-vim.opt.wrap = false -- display lines as one long line
+vim.opt.wrap = true -- display lines as one long line
+vim.opt.linebreak = true
+vim.opt.breakindent = true
+vim.opt.showbreak = "↪ "
 vim.opt.scrolloff = 8 -- minimal number of screen lines to keep above and below the cursor
 vim.opt.sidescrolloff = 8 -- minimal number of screen columns to keep to the left and right of the cursor
 
@@ -40,9 +43,6 @@ vim.opt.timeoutlen = 300 -- time to wait for a mapped sequence to complete (ms)
 
 -- Formatting
 vim.opt.smartindent = true -- make indenting smarter
-vim.opt.breakindent = true -- preserve indent on wrapped lines
 
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-
-

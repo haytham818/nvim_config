@@ -48,4 +48,6 @@ require("lazy").setup({
 	require("plugin.markview"),
 	require("plugin.precognition"),
 	require("plugin.lazydev"),
+	require("plugin.yazi"),
+	require("plugin.roslyn"),
 })
