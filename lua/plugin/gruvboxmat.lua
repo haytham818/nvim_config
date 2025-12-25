@@ -2,6 +2,7 @@ return {
 	"sainnhe/gruvbox-material",
 	lazy = false,
 	priority = 1000,
+	cond = not vim.g.vscode,
 	config = function()
 		-- 风格：'hard', 'medium', 'soft'
 		vim.g.gruvbox_material_background = "hard"

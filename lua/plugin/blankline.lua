@@ -2,6 +2,7 @@ return {
   "lukas-reineke/indent-blankline.nvim",
   main = "ibl", -- 指定加载的主模块 (v3 重要改动)
   event = { "BufReadPost", "BufNewFile" },
+  cond = not vim.g.vscode,
   opts = {
     -- 1. 缩进线的基本配置
     indent = {

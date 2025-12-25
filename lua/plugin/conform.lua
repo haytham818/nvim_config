@@ -2,6 +2,7 @@ return {
 	"stevearc/conform.nvim",
 	event = { "BufWritePre" },
 	cmd = { "ConformInfo" },
+	cond = not vim.g.vscode,
 
 	-- 将快捷键定义移到 Lazy 的 keys 模块中，更规范
 	keys = {

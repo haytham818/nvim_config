@@ -2,6 +2,7 @@ return {
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate", -- 安装/更新插件时，自动更新语法解析器
 	event = { "BufReadPost", "BufNewFile" }, -- 打开文件时才加载，提升启动速度
+	vscode = true,
 	config = function()
 		require("nvim-treesitter.configs").setup({
 			-- 1. 确保安装的语言解析器
@@ -47,8 +48,9 @@ return {
 			auto_install = true,
 
 			-- 4. 启用代码高亮 (核心功能)
+			-- 在 VSCode 中禁用高亮，由 VSCode 处理
 			highlight = {
-				enable = true,
+				enable = not vim.g.vscode,
 				-- 针对某些大文件禁用高亮，防止卡顿
 				disable = function(lang, buf)
 					local max_filesize = 100 * 1024 -- 100 KB

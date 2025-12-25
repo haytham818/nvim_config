@@ -1,4 +1,4 @@
-if vim.fn.has("win32") == 1 then
+if vim.fn.has("win32") == 1 and not vim.g.vscode then
 	return {
 		"seblj/roslyn.nvim",
 		ft = "cs",
