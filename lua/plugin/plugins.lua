@@ -50,4 +50,5 @@ require("lazy").setup({
 	require("plugin.lazydev"),
 	require("plugin.yazi"),
 	require("plugin.roslyn"),
+	require("plugin.overseer"),
 })
