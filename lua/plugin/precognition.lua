@@ -1,6 +1,7 @@
 return {
 	"tris203/precognition.nvim",
 	event = "VeryLazy", -- 这是一个辅助练习工具，不需要在启动时加载
+	cond = not vim.g.vscode,
 	opts = {
 		-- 1. 初始状态
 		-- 建议设为 false。当你发现自己又在疯狂按 j/k 时，手动按快捷键开启它来惩罚自己。

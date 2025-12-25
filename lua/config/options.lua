@@ -9,6 +9,11 @@ vim.opt.softtabstop = 4 -- number of spaces in tab when editing
 vim.opt.shiftwidth = 4 -- insert 4 spaces on a tab
 vim.opt.expandtab = true -- tabs are spaces, mainly because of Python
 
+-- Skip UI config in VSCode (VSCode handles all UI)
+if vim.g.vscode then
+	return
+end
+
 -- UI config
 vim.opt.number = true -- show absolute number
 vim.opt.relativenumber = true -- add numbers to each line on the left side

@@ -2,6 +2,7 @@
 return {
 	"folke/persistence.nvim",
 	event = "BufReadPre",
+	cond = not vim.g.vscode,
 	opts = {},
 	-- 快捷键
 	keys = {

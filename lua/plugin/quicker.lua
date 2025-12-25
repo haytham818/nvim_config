@@ -1,6 +1,7 @@
 return {
 	"stevearc/quicker.nvim",
 	event = "FileType qf", -- 只有打开 Quickfix 窗口时才加载，极致优化
+	cond = not vim.g.vscode,
 
 	-- 全局快捷键：用于快速打开/关闭 Quickfix
 	keys = {

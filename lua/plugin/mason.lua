@@ -1,5 +1,6 @@
 return {
 	"williamboman/mason.nvim",
+	cond = not vim.g.vscode,
 	dependencies = {
 		"williamboman/mason-lspconfig.nvim",
 	},

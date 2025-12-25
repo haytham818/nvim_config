@@ -2,6 +2,7 @@
 return {
 	"stevearc/overseer.nvim",
 	event = "VeryLazy", -- 懒加载
+	cond = not vim.g.vscode,
 	opts = {
 		-- 1. 启用 DAP 集成 (如果你使用 nvim-dap)
 		dap = false,
