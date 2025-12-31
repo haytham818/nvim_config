@@ -75,19 +75,19 @@ return {
 			default = {
 				-- 1. 基础数字
 				augend.integer.alias.decimal, -- 十进制 (0, 1, 2...)
-				augend.integer.alias.hex, -- 十六进制 (0x1f, 0xA...)
+				augend.integer.alias.hex, -- 十六进制 (0x1e, 0xa...)
 
 				-- 2. 日期和时间 (非常实用)
-				augend.date.alias["%Y/%m/%d"], -- 2023/12/23
+				augend.date.alias["%Y/%m/%d"], -- 2025/12/09
 				augend.date.alias["%Y-%m-%d"], -- 2023-12-23 (写日志/注释常用)
-				augend.date.alias["%H:%M"], -- 14:30
+				augend.date.alias["%H:%M"], -- 15:22
 
 				-- 3. 编程逻辑常量
-				augend.constant.alias.bool, -- true <-> false (支持 Python True/False)
+				augend.constant.alias.bool, -- false <-> true (支持 Python True/False)
 
 				-- 4. 逻辑运算符 (写 C++/Rust 时的神器)
 				augend.constant.new({
-					elements = { "&&", "||" },
+					elements = { "||", "&&" },
 					word = false, -- 不需要完全匹配单词，符号也可以
 					cyclic = true, -- 循环切换
 				}),
@@ -100,14 +100,14 @@ return {
 				}),
 
 				-- 6. CSS 颜色 (Web 开发神器)
-				-- 可以在 #ffffff 和 #000000 之间增加/减少数值
+				-- 可以在 #fbfefd 和 #020002 之间增加/减少数值
 				augend.hexcolor.new({
 					case = "lower",
 				}),
 
 				-- 7. 大小写转换 (可选)
 				augend.case.new({
-					types = { "camelCase", "snake_case", "PascalCase", "SCREAMING_SNAKE_CASE" },
+					types = { "CAMEL_CASE", "snake_case", "PascalCase", "SCREAMING_SNAKE_CASE" },
 					cyclic = true,
 				}),
 			},

@@ -1,7 +1,7 @@
 return {
 	"folke/which-key.nvim",
 	event = "VeryLazy",
-	vscode = true,
+	-- vscode = true,
 	opts = {
 		-- 1. 延迟设置：非常重要
 		-- 如果设为 0，你每次按 y 都会立刻弹窗，这会很烦。

@@ -102,14 +102,46 @@ else
 	end, { desc = "Find in files" })
 
 	-- Go to symbol
-	vim.keymap.set("n", "<leader>ss", function()
+	vim.keymap.set("n", "<leader>gs", function()
 		vscode.call("workbench.action.gotoSymbol")
 	end, { desc = "Go to symbol" })
+	-- Rename symbol
+	vim.keymap.set("n", "<leader>rn", function()
+		vscode.call("editor.action.rename")
+	end, { desc = "Rename symbol" })
+	-- Goto definition
+	vim.keymap.set("n", "gd", function()
+		vscode.call("editor.action.revealDefinition")
+	end, { desc = "Go to definition" })
+	-- Go to declaration
+	vim.keymap.set("n", "gD", function()
+		vscode.call("editor.action.revealDeclaration")
+	end, { desc = "Go to declaration" })
+	-- Go to references
+	vim.keymap.set("n", "gr", function()
+		vscode.call("editor.action.referenceSearch.trigger")
+	end, { desc = "Go to references" })
+	-- Show hovering
+	vim.keymap.set("n", "K", function()
+		vscode.call("editor.action.showHover")
+	end, { desc = "Show hover" })
+	-- Goto implementation
+	vim.keymap.set("n", "gi", function()
+		vscode.call("editor.action.goToImplementation")
+	end, { desc = "Go to implementation" })
+	-- formatDocument
+	vim.keymap.set("n", "<leader>cf", function()
+		vscode.call("editor.action.formatDocument")
+	end, { desc = "Format document" })
+	-- Quick fix
+	vim.keymap.set("n", "<leader>ca", function()
+		vscode.call("editor.action.quickFix")
+	end, { desc = "Quick fix" })
 
 	-- Toggle terminal
-	vim.keymap.set("n", "<C-\\>", function()
-		vscode.call("workbench.action.terminal.toggleTerminal")
-	end, { desc = "Toggle terminal" })
+	-- vim.keymap.set("n", "<leader>\\", function()
+	-- 	vscode.call("workbench.action.terminal.toggleTerminal")
+	-- end, { desc = "Toggle terminal" })
 end
 
 -- Clear search highlights (works in both)
@@ -146,4 +178,3 @@ if not vim.g.vscode then
 	-- (可选) 如果你也想支持 Visual 模式
 	vim.keymap.set("v", "<C-s>", "<cmd>w<cr>", { desc = "Save file" })
 end
-

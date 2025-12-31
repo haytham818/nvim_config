@@ -51,7 +51,7 @@ return {
 		-- 4. URL 链接
 		-- L: 选中光标下的 URL
 		-- 用法: dL (删除链接), cL (修改链接)
-		-- https://www.test.com/path
+		-- "https://www.test.com/path"
 		{
 			"L",
 			function()
