@@ -25,7 +25,7 @@ return {
 				vim.opt_local.winbar = nil
 			end,
 
-			shell = "nu",
+            shell = vim.o.shell,
 			-- shell = "pwsh",
 		})
 

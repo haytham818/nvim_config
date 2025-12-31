@@ -15,6 +15,21 @@ if vim.fn.has("win32") == 1 then
 	end
 end
 
+
+if vim.fn.has("win32") == 0 then
+    -- Use zsh on Unix-like systems if available
+    if vim.fn.executable("zsh") == 1 then
+        vim.opt.shell = "zsh"
+    end
+end
+
+if vim.fn.has("win32") == 1 then
+    -- Use pwsh on Windows if available
+    if vim.fn.executable("pwsh") == 1 then
+        vim.opt.shell = "pwsh"
+    end
+end
+
 require("config.commands")
 require("config.keymaps")
 require("config.options")
