@@ -25,14 +25,14 @@ return {
 				vim.opt_local.winbar = nil
 			end,
 
-            shell = vim.o.shell,
+			shell = vim.o.shell,
 			-- shell = "pwsh",
 		})
 
 		function _G.set_terminal_keymaps()
 			local opts = { buffer = 0 }
 			-- 按 Esc 变为普通模式 (方便复制粘贴或移动光标)
-			vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
+			vim.keymap.set("t", "<S-t>", [[<C-\><C-n>]], opts)
 			-- 方便在终端和其他窗口之间切换
 			vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], opts)
 			vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], opts)

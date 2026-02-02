@@ -3,6 +3,7 @@ return {
 	build = ":TSUpdate", -- 安装/更新插件时，自动更新语法解析器
 	event = { "BufReadPost", "BufNewFile" }, -- 打开文件时才加载，提升启动速度
 	vscode = true,
+	branch = "master",
 	config = function()
 		require("nvim-treesitter.configs").setup({
 			-- 1. 确保安装的语言解析器

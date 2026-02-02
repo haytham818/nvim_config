@@ -85,6 +85,7 @@ vim.diagnostic.config({
 })
 
 vim.lsp.enable({
+	"roslyn_ls",
 	"clangd",
 	"neocmake",
 	"taplo",

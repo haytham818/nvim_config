@@ -5,9 +5,7 @@ return {
 	cond = not vim.g.vscode,
 	opts = {
 		-- 1. 启用 DAP 集成 (如果你使用 nvim-dap)
-		dap = false,
-
-
+		dap = true,
 
 		-- 2. 任务列表外观配置
 		task_list = {
@@ -26,7 +24,7 @@ return {
 				["<C-e>"] = "Edit",
 				["o"] = "Open",
 				["<C-v>"] = "OpenVsplit",
-                ["<C-s>"] = "OpenSplit",
+				["<C-s>"] = "OpenSplit",
 				["<C-f>"] = "OpenFloat", -- 在浮动窗口打开输出
 				["<C-q>"] = "OpenQuickFix",
 				["p"] = "TogglePreview",

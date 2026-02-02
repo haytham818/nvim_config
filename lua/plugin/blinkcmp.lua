@@ -70,8 +70,32 @@ return {
 				-- Use treesitter to highlight the label text for the given list of sources
 				draw = {
 					treesitter = { "lsp" },
+
+					columns = {
+						{ "kind_icon" },
+						{ "label", "label_description", gap = 1 },
+						{ "kind" },
+					},
+
+					-- componets = {
+					-- label = {
+					-- width = {
+					-- fill = true,
+					-- max = 60,
+					-- },
+					-- 	text = function(ctx)
+					-- 		return ctx.label .. ctx.label_description
+					-- 	end,
+					-- },
+					-- label_description = {
+					-- 	width = {
+					-- 		max = 30,
+					-- 	},
+					-- },
+					-- },
 				},
 				border = "rounded",
+				max_height = 15,
 			},
 			-- Show completions after typing a trigger character, defined by the source
 			trigger = { show_on_trigger_character = true },
@@ -81,6 +105,8 @@ return {
 				auto_show_delay_ms = 200,
 				window = {
 					border = "rounded",
+					max_height = 20,
+					max_width = 60,
 				},
 			},
 			accept = {

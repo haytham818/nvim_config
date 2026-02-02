@@ -5,7 +5,7 @@ return {
 	opts = {
 		-- 1. 初始状态
 		-- 建议设为 false。当你发现自己又在疯狂按 j/k 时，手动按快捷键开启它来惩罚自己。
-		startVisible = true,
+		startVisible = false,
 
 		-- 2. 视觉设置
 		showBlankVirtLine = true, -- 是否在空行显示提示

@@ -3,8 +3,6 @@ if vim.fn.has("win32") == 1 and not vim.g.vscode then
 		"seblj/roslyn.nvim",
 		ft = "cs",
 		opts = {
-			-- 这里的配置会自动帮你下载 Roslyn LSP，不需要 Mason
-			-- 但你需要确保系统装了 .NET SDK
 			config = {
 				settings = {
 					["csharp|inlay_hints"] = {

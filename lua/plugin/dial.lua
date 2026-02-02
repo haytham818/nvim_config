@@ -75,7 +75,7 @@ return {
 			default = {
 				-- 1. 基础数字
 				augend.integer.alias.decimal, -- 十进制 (0, 1, 2...)
-				augend.integer.alias.hex, -- 十六进制 (0x1e, 0xa...)
+				augend.integer.alias.hex, -- 十六进制 (0x1f, 0xa...)
 
 				-- 2. 日期和时间 (非常实用)
 				augend.date.alias["%Y/%m/%d"], -- 2025/12/09
@@ -107,7 +107,7 @@ return {
 
 				-- 7. 大小写转换 (可选)
 				augend.case.new({
-					types = { "CAMEL_CASE", "snake_case", "PascalCase", "SCREAMING_SNAKE_CASE" },
+					types = { "snake_case", "PascalCase", "SCREAMING_SNAKE_CASE" },
 					cyclic = true,
 				}),
 			},
