@@ -28,18 +28,21 @@ return {
 			-- shell = "pwsh",
 		})
 
-		function _G.set_terminal_keymaps()
-			local opts = { buffer = 0 }
-			-- 按 Esc 变为普通模式 (方便复制粘贴或移动光标)
-			vim.keymap.set("t", "<S-t>", [[<C-\><C-n>]], opts)
-			-- 方便在终端和其他窗口之间切换
-			vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], opts)
-			vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], opts)
-			vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], opts)
-			vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], opts)
-		end
-
-		-- 自动应用上面的按键映射
-		vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
+		-- 终端 keymaps: 使用 augroup 确保不会重复注册
+		local term_group = vim.api.nvim_create_augroup("ToggleTermKeymaps", { clear = true })
+		vim.api.nvim_create_autocmd("TermOpen", {
+			group = term_group,
+			pattern = "term://*",
+			callback = function()
+				local opts = { buffer = 0 }
+				-- 按 S-t 变为普通模式 (方便复制粘贴或移动光标)
+				vim.keymap.set("t", "<S-t>", [[<C-\><C-n>]], opts)
+				-- 方便在终端和其他窗口之间切换
+				vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], opts)
+				vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], opts)
+				vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], opts)
+				vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], opts)
+			end,
+		})
 	end,
 }

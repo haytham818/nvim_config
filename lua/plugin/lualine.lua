@@ -1,6 +1,9 @@
 return {
 	"nvim-lualine/lualine.nvim",
-	dependencies = { "nvim-tree/nvim-web-devicons" }, -- 必须安装图标字体
+	dependencies = {
+		"nvim-tree/nvim-web-devicons", -- 必须安装图标字体
+		"folke/noice.nvim", -- 确保 noice 在 lualine 之前加载（状态栏集成）
+	},
 	event = "VeryLazy", -- 懒加载，不需要启动时立即加载
 	opts = function(_, opts)
 		-- 获取 noice 的状态接口（如果未安装 noice，则不报错）

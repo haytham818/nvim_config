@@ -1,8 +1,8 @@
 vim.opt.runtimepath:append("/home/haytham/.local/share/nvim/site")
 
 -- Cross-platform shell configuration
--- Automatically use PowerShell on Windows if available
 if vim.fn.has("win32") == 1 then
+	-- Windows: PowerShell / pwsh
 	local powershell_options = {
 		shell = vim.fn.executable("pwsh") == 1 and "pwsh" or "powershell",
 		shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;",
@@ -11,23 +11,13 @@ if vim.fn.has("win32") == 1 then
 		shellquote = "",
 		shellxquote = "",
 	}
-
 	for option, value in pairs(powershell_options) do
 		vim.opt[option] = value
 	end
-end
-
-if vim.fn.has("win32") == 0 then
-	-- Use zsh on Unix-like systems if available
+else
+	-- Unix: prefer zsh if available
 	if vim.fn.executable("zsh") == 1 then
 		vim.opt.shell = "zsh"
-	end
-end
-
-if vim.fn.has("win32") == 1 then
-	-- Use pwsh on Windows if available
-	if vim.fn.executable("pwsh") == 1 then
-		vim.opt.shell = "pwsh"
 	end
 end
 

@@ -42,6 +42,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
+-- 诊断显示配置 (统一入口，避免重复调用)
 vim.diagnostic.config({
 	virtual_text = {
 		prefix = "●", -- 或者是 '■', '▎', 'x'
@@ -52,20 +53,6 @@ vim.diagnostic.config({
 		source = "always", -- 浮窗中显示是由哪个 LSP 报错的
 		border = "rounded",
 	},
-	signs = true, -- 在行号左侧显示图标
-	underline = true,
-	update_in_insert = false, -- 输入时不要一直闪烁报错，退出插入模式再报错
-	severity_sort = true, -- Sort diagnostics by severity
-})
-
--- 修改左侧行号栏的错误图标 (需要 Nerd Font)
--- local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
--- for type, icon in pairs(signs) do
--- 	local hl = "DiagnosticSign" .. type
--- 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
--- end
-
-vim.diagnostic.config({
 	signs = {
 		text = {
 			[vim.diagnostic.severity.ERROR] = " ",
@@ -73,10 +60,10 @@ vim.diagnostic.config({
 			[vim.diagnostic.severity.HINT] = "󰠠 ",
 			[vim.diagnostic.severity.INFO] = " ",
 		},
-		-- 以下选项可选，保持默认即可
-		-- linehl = false, -- 是否高亮整行
-		-- numhl = true, -- 是否高亮行号
 	},
+	underline = true,
+	update_in_insert = false, -- 输入时不要一直闪烁报错，退出插入模式再报错
+	severity_sort = true, -- Sort diagnostics by severity
 })
 
 vim.lsp.enable({

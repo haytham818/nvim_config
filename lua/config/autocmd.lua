@@ -2,10 +2,15 @@
 -- 默认是 4000ms (4秒)，太慢了，建议设为 300ms 或 500ms
 vim.opt.updatetime = 300
 
--- 2. 创建自动命令：当光标停留时打开诊断浮窗
+-- 2. 创建自动命令：当光标停留时打开诊断浮窗（仅当有诊断信息时）
 vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 	group = vim.api.nvim_create_augroup("float_diagnostic", { clear = true }),
 	callback = function()
+		-- 只有当前行存在诊断信息时才弹窗，避免空消耗
+		local diagnostics = vim.diagnostic.get(0, { lnum = vim.fn.line(".") - 1 })
+		if #diagnostics == 0 then
+			return
+		end
 		vim.diagnostic.open_float(nil, {
 			focus = false, -- 弹窗时不抢夺焦点
 			scope = "cursor", -- 仅显示光标下的错误

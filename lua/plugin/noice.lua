@@ -18,8 +18,6 @@ return {
 				["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 				-- 使用 Noice 的浮动窗口显示 vim.lsp.util.stylize_markdown
 				["vim.lsp.util.stylize_markdown"] = true,
-				-- 使用 Noice 的浮动窗口显示 cmp 的文档 (如果你用了 nvim-cmp)
-				-- ["cmp.entry.get_documentation"] = true,
 			},
 			-- 悬浮文档和签名帮助的配置
 			hover = {

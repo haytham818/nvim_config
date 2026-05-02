@@ -18,7 +18,7 @@ vim.opt.splitright = true -- open new horizontal splits right
 vim.opt.termguicolors = true -- enable 24-bit RGB color in the TUI
 vim.opt.showmode = false -- we are experienced, wo don't need the "-- INSERT --" mode hint
 vim.opt.signcolumn = "yes" -- always show sign column to prevent text shifting
-vim.opt.wrap = true -- display lines as one long line
+vim.opt.wrap = true -- wrap long lines (soft wrap)
 vim.opt.linebreak = true
 vim.opt.breakindent = true
 vim.opt.showbreak = "↪ "
@@ -38,7 +38,7 @@ vim.opt.writebackup = false -- don't create backup before overwriting file
 vim.opt.swapfile = false -- don't create swapfiles
 
 -- Performance
-vim.opt.lazyredraw = false -- don't redraw while executing macros (good for performance)
+vim.opt.lazyredraw = false -- skip redraws during macros/scripts for better performance
 vim.opt.timeoutlen = 300 -- time to wait for a mapped sequence to complete (ms)
 
 -- Formatting

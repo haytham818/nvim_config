@@ -3,8 +3,10 @@ return {
 	ft = "lua", -- 仅在 lua 文件中加载
 	opts = {
 		library = {
-			-- 自动加载你的插件目录，提供插件的 API 补全
+			-- luvit 类型: 提供 vim.uv / vim.loop API 补全
 			{ path = "luvit-meta/library", words = { "vim%.uv" } },
+			-- LuaSnip 类型 (如果你使用 luasnip 写 snippet)
+			-- { path = "LuaSnip/library", words = { "require%.luasnip" } },
 		},
 	},
 }

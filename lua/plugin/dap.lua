@@ -108,27 +108,25 @@ return {
 			},
 		})
 
-		-- 4. 语言特定配置补充
+		-- 5. 语言特定配置补充
 
-		-- C/C++/Rust (使用 codelldb)
-		-- mason-nvim-dap 的自动配置通常够用了，但如果你发现问题，
-		-- 可以手动配置 dap.configurations.cpp / .c / .rust
-
-		-- C# 配置 (因为你用了 roslyn 插件)
-		dap.adapters.coreclr = {
-			type = "executable",
-			command = vim.fn.stdpath("data") .. "/mason/bin/netcoredbg",
-			args = { "--interpreter=vscode" },
-		}
-		dap.configurations.cs = {
-			{
-				type = "coreclr",
-				name = "launch - netcoredbg",
-				request = "launch",
-				program = function()
-					return vim.fn.input("Path to dll: ", vim.fn.getcwd() .. "/bin/Debug/", "file")
-				end,
-			},
-		}
+		-- C# 配置 (netcoredbg, 仅 Windows)
+		if vim.fn.has("win32") == 1 then
+			dap.adapters.coreclr = {
+				type = "executable",
+				command = vim.fn.stdpath("data") .. "/mason/bin/netcoredbg",
+				args = { "--interpreter=vscode" },
+			}
+			dap.configurations.cs = {
+				{
+					type = "coreclr",
+					name = "launch - netcoredbg",
+					request = "launch",
+					program = function()
+						return vim.fn.input("Path to dll: ", vim.fn.getcwd() .. "/bin/Debug/", "file")
+					end,
+				},
+			}
+		end
 	end,
 }
