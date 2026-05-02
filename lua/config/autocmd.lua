@@ -1,8 +1,3 @@
--- Skip most autocmds in VSCode (VSCode handles diagnostics, UI, etc.)
-if vim.g.vscode then
-	return
-end
-
 -- 1. 设置 hover 的触发时间（毫秒）
 -- 默认是 4000ms (4秒)，太慢了，建议设为 300ms 或 500ms
 vim.opt.updatetime = 300

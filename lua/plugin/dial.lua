@@ -1,6 +1,5 @@
 return {
 	"monaqa/dial.nvim",
-	vscode = true,
 	-- 懒加载：只有当按下以下按键时才加载插件
 	keys = {
 		{

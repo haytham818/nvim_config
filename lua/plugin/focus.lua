@@ -3,7 +3,6 @@ return {
 	-- version = "*", -- 使用稳定版
 	version = false, -- 强制最新版
 	event = "VeryLazy", -- 既然是 UI 插件，可以在启动后加载
-	cond = not vim.g.vscode,
 
 	opts = {
 		-- 1. 开启自动调整大小 (核心功能)

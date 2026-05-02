@@ -1,7 +1,6 @@
 return {
 	"L3MON4D3/LuaSnip",
 	version = "v2.*",
-	cond = not vim.g.vscode,
 	-- build = "make install_jsregexp", -- Windows 上如果報錯可註釋掉
 	dependencies = { "rafamadriz/friendly-snippets" }, -- 必裝：現成的代碼庫
 	config = function()

@@ -1,7 +1,6 @@
 return {
 	"mikavilpas/yazi.nvim",
 	event = "VeryLazy",
-	cond = not vim.g.vscode,
 	keys = {
 		-- 👇 核心快捷键：打开 Yazi
 		{

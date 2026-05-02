@@ -2,7 +2,6 @@ return {
 	"RaafatTurki/corn.nvim",
 	event = "VeryLazy", -- 或者 "LspAttach"
 	cmd = { "Corn" }, -- 懒加载命令
-	cond = not vim.g.vscode,
 	opts = {
 		-- 开启自动命令（自动显示诊断）
 		auto_cmds = false,

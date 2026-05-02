@@ -1,7 +1,6 @@
 return {
 	"otavioschwanck/arrow.nvim",
 	event = "BufReadPre",
-	cond = not vim.g.vscode,
 	opts = {
 		show_icons = true,
 		leader_key = ";", -- 推荐：使用分号作为前缀键 (比如 ; + 1 跳转)

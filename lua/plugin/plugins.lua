@@ -52,7 +52,6 @@ require("lazy").setup({
 	require("plugin.yazi"),
 	require("plugin.roslyn"),
 	require("plugin.overseer"),
-	require("plugin.vscodema"),
 	-- require("plugin.smartsp"),
 	require("plugin.tmuxnavi"),
 	require("plugin.dap"),

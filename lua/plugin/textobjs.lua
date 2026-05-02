@@ -1,7 +1,6 @@
 return {
 	"chrisgrieser/nvim-various-textobjs",
 	lazy = true,
-	vscode = true,
 	-- 只有当用户按下以下快捷键时，插件才会被加载
 	keys = {
 		-- 1. 缩进 (Indentation) - 写 Python/Lua/YAML 必用

@@ -1,7 +1,6 @@
 return {
 	"gbprod/yanky.nvim",
 	event = { "BufReadPost", "BufNewFile" },
-	vscode = true,
 	opts = {
 		-- 1. 视觉反馈：复制或粘贴时高亮文本
 		highlight = {
@@ -50,17 +49,15 @@ return {
 		}
 
 		---------------------------------------------------------
-		-- 3. Telescope 集成 (查找剪贴板历史) - 仅在非 VSCode 环境
+		-- 3. Telescope 集成 (查找剪贴板历史)
 		---------------------------------------------------------
-		if not vim.g.vscode then
-			table.insert(keys, {
-				"<leader>y",
-				function()
-					require("telescope").extensions.yank_history.yank_history()
-				end,
-				desc = "Open Yank History",
-			})
-		end
+		table.insert(keys, {
+			"<leader>y",
+			function()
+				require("telescope").extensions.yank_history.yank_history()
+			end,
+			desc = "Open Yank History",
+		})
 
 		return keys
 	end,

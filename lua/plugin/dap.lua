@@ -1,6 +1,5 @@
 return {
 	"mfussenegger/nvim-dap",
-	cond = not vim.g.vscode,
 	dependencies = {
 		"rcarriga/nvim-dap-ui", -- 漂亮的调试界面
 		"nvim-neotest/nvim-nio", -- dap-ui 的依赖

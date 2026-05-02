@@ -1,6 +1,5 @@
 return {
 	"kawre/leetcode.nvim",
-	cond = not vim.g.vscode,
 	dependencies = {
 		"nvim-telescope/telescope.nvim",
 		"nvim-lua/plenary.nvim", -- Telescope 的依赖

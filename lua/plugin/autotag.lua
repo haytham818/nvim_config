@@ -1,7 +1,6 @@
 return {
 	"windwp/nvim-ts-autotag",
 	event = { "BufReadPre", "BufNewFile" }, -- 打开文件时加载
-	cond = not vim.g.vscode,
 	dependencies = { "nvim-treesitter/nvim-treesitter" }, -- 强依赖 Treesitter
 	config = function()
 		require("nvim-ts-autotag").setup({

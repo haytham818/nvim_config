@@ -1,6 +1,5 @@
 return {
 	"catppuccin/nvim",
-	cond = not vim.g.vscode,
 	name = "catppuccin",
 	priority = 1000, -- 确保最先加载
 	config = function()

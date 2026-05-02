@@ -2,7 +2,6 @@ return {
 	"OXY2DEV/markview.nvim",
 	-- lazy = false, -- 建议不懒加载，或者仅对 markdown 文件加载
 	ft = { "markdown", "norg", "rmd", "org" }, -- 如果你想懒加载，用这个
-	cond = not vim.g.vscode,
 
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter",

@@ -1,7 +1,6 @@
 return {
 	"akinsho/toggleterm.nvim",
 	version = "*",
-	cond = not vim.g.vscode,
 	config = function()
 		require("toggleterm").setup({
 			-- 1. 设置打开/关闭终端的快捷键

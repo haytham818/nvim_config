@@ -1,7 +1,6 @@
 return {
 	"numToStr/Comment.nvim",
 	event = { "BufReadPre", "BufNewFile" },
-	vscode = true,
 	dependencies = {
 		"JoosepAlviste/nvim-ts-context-commentstring", -- 依赖这个插件来判断上下文
 	},

@@ -1,8 +1,3 @@
--- Skip LSP configuration in VSCode (VSCode handles LSP)
-if vim.g.vscode then
-	return
-end
-
 -- Remove Global Default Key mapping
 vim.keymap.del("n", "grn")
 vim.keymap.del("n", "gra")

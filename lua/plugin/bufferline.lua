@@ -1,7 +1,6 @@
 return {
 	"akinsho/bufferline.nvim",
 	version = "*",
-	cond = not vim.g.vscode,
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	event = "VeryLazy", -- 懒加载，当你进入 UI 后加载
 	lazy = false,
