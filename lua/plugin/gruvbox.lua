@@ -8,7 +8,7 @@ return {
 			contrast = "hard",
 
 			-- 是否透明背景 (透出终端背景图)
-			transparent_mode = false,
+			transparent_mode = true,
 
 			-- 细节样式
 			italic = {

@@ -15,9 +15,9 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	-- require("plugin.monokai"),
 	-- require("plugin.onedarkpro"),
-	-- require("plugin.gruvbox"),
+	require("plugin.gruvbox"),
 	-- require("plugin.gruvboxmat"),
-	require("plugin.catppuccin"),
+	-- require("plugin.catppuccin"),
 	require("plugin.mason"),
 	require("plugin.blinkcmp"),
 	require("plugin.bufferline"),

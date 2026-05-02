@@ -113,7 +113,7 @@ return {
 	name = "roslyn_ls",
 	offset_encoding = "utf-8",
 	cmd = {
-		"Microsoft.CodeAnalysis.LanguageServer",
+		vim.fn.stdpath("data") .. "/mason/bin/roslyn",
 		"--logLevel",
 		"Information",
 		"--extensionLogDirectory",

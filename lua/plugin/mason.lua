@@ -26,7 +26,7 @@ return {
 			ensure_installed = {
 				"lua_ls", -- Lua
 				"clangd", -- C/C++
-				"rust_analyzer", -- Rust
+				-- rust_analyzer 使用 rustup 自带版本，Mason 版本与 Cargo 1.95 不兼容 (--lockfile-path)
 				"taplo", -- TOML
 				"pyright", -- Python
 			},

@@ -1,5 +1,9 @@
 vim.opt.runtimepath:append("/home/haytham/.local/share/nvim/site")
 
+if vim.g.vscode then
+	vim.opt.cmdheight = 15
+end
+
 -- Cross-platform shell configuration
 -- Automatically use PowerShell on Windows if available
 if vim.fn.has("win32") == 1 then

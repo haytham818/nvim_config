@@ -28,6 +28,7 @@ return {
 			toml = { "taplo" },
 			cs = { "csharpier" },
 			rust = { "rustfmt", lsp_format = "fallback" },
+			zig = { "zigfmt" },
 			-- Web 全家桶
 			javascript = { "prettier" },
 			typescript = { "prettier" },

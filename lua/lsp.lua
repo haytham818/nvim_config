@@ -88,11 +88,12 @@ vim.lsp.enable({
 	"roslyn_ls",
 	"clangd",
 	"neocmake",
-	"taplo",
+	-- taplo LSP 禁用 (schema catalog 拉取报错, 格式化由 conform.nvim 的 taplo CLI 处理)
 	"stylua",
 	"rust_analyzer",
 	"lua_ls",
 	"html",
 	"cssls",
 	"emmet_language_server",
+	"zls",
 })
