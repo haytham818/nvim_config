@@ -1,17 +1,16 @@
--- Remove Global Default Key mapping
-vim.keymap.del("n", "grn")
-vim.keymap.del("n", "gra")
-vim.keymap.del("n", "grr")
-vim.keymap.del("n", "gri")
-vim.keymap.del("n", "gO")
+-- Remove global default key mappings.
+for _, lhs in ipairs({ "grn", "gra", "grr", "gri", "gO" }) do
+	pcall(vim.keymap.del, "n", lhs)
+end
 
--- Create keymapping
--- LspAttach: After an LSP Client performs "initialize" and attaches to a buffer.
+local lsp_group = vim.api.nvim_create_augroup("UserLspConfig", { clear = true })
+
 vim.api.nvim_create_autocmd("LspAttach", {
+	group = lsp_group,
 	callback = function(args)
 		local keymap = vim.keymap
 		local lsp = vim.lsp
-		local bufopts = { noremap = true, silent = true }
+		local bufopts = { buffer = args.buf, noremap = true, silent = true }
 
 		keymap.set("n", "gr", lsp.buf.references, bufopts)
 		keymap.set("n", "gd", lsp.buf.definition, bufopts)
@@ -23,22 +22,17 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		-- keymap.set("n", "<space>f", function()
 		-- 	vim.lsp.buf.format({ async = true })
 		-- end, bufopts)
-		keymap.set("n", "<leader>ca", lsp.buf.code_action, { desc = "Code Action" })
-	end,
-})
+		keymap.set("n", "<leader>ca", lsp.buf.code_action, vim.tbl_extend("force", bufopts, { desc = "Code Action" }))
 
--- 开启内联提示
-vim.api.nvim_create_autocmd("LspAttach", {
-	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-	callback = function(ev)
-		-- 开启 Inlay Hints
-		local client = vim.lsp.get_client_by_id(ev.data.client_id)
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
 		if client and client.server_capabilities.inlayHintProvider then
-			vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
+			vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
 		end
+
 		vim.keymap.set("n", "<leader>th", function()
-			vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-		end, { desc = "Toggle Inlay Hints" })
+			local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = args.buf })
+			vim.lsp.inlay_hint.enable(not enabled, { bufnr = args.buf })
+		end, vim.tbl_extend("force", bufopts, { desc = "Toggle Inlay Hints" }))
 	end,
 })
 
@@ -74,8 +68,6 @@ vim.lsp.enable({
 	"stylua",
 	"rust_analyzer",
 	"lua_ls",
-	"html",
-	"cssls",
-	"emmet_language_server",
+	"pyright",
 	"zls",
 })

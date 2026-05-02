@@ -1,6 +1,18 @@
 return {
 	"akinsho/toggleterm.nvim",
 	version = "*",
+	cmd = {
+		"ToggleTerm",
+		"ToggleTermToggleAll",
+		"ToggleTermSendVisualLines",
+		"ToggleTermSendVisualSelection",
+		"ToggleTermSendCurrentLine",
+		"ToggleTermSetName",
+	},
+	keys = {
+		{ [[<c-\>]], "<cmd>ToggleTerm<cr>", mode = { "n", "t" }, desc = "Toggle terminal" },
+		{ [[<c-\>]], "<esc><cmd>ToggleTerm<cr>", mode = "i", desc = "Toggle terminal" },
+	},
 	config = function()
 		require("toggleterm").setup({
 			-- 1. 设置打开/关闭终端的快捷键

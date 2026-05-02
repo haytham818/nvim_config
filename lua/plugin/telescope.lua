@@ -1,5 +1,12 @@
 return {
 	"nvim-telescope/telescope.nvim",
+	cmd = "Telescope",
+	keys = {
+		{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Telescope find files" },
+		{ "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Telescope live grep" },
+		{ "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Telescope buffers" },
+		{ "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Telescope help tags" },
+	},
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"nvim-tree/nvim-web-devicons",
@@ -7,25 +14,6 @@ return {
 	},
 	config = function()
 		local telescope = require("telescope")
-		local builtin = require("telescope.builtin")
-
-		-- 设置快捷键 (这是最常用的映射)
-
-		-- <leader>ff : Find Files (找文件)
-
-		vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
-
-		-- <leader>fg : Live Grep (全局搜关键字 - 需要 ripgrep)
-
-		vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Telescope live grep" })
-
-		-- <leader>fb : Find Buffers (在打开的文件之间切换)
-
-		vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
-
-		-- <leader>fh : Help Tags (搜帮助文档)
-
-		vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Telescope help tags" })
 
 		telescope.setup({
 			defaults = {

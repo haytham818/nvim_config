@@ -3,7 +3,6 @@ return {
 	version = "*",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	event = "VeryLazy", -- 懒加载，当你进入 UI 后加载
-	lazy = false,
 
 	-- 1. 定义快捷键：这里设置了最常用的 Tab 切换和关闭操作
 	keys = {

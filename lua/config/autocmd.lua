@@ -59,15 +59,19 @@ vim.api.nvim_create_autocmd("FileType", {
 
 local save_group = vim.api.nvim_create_augroup("AutoSave", { clear = true })
 
-vim.api.nvim_create_autocmd({ "FocusLost", "BufLeave", "WinLeave" }, {
+vim.api.nvim_create_autocmd({ "FocusLost", "BufLeave" }, {
 	group = save_group,
 	pattern = "*", -- 对所有文件生效
 	callback = function()
-		-- 1. 只有当 buffer 有文件名且被修改过时才保存
-		if vim.bo.modified and vim.fn.expand("%") ~= "" and vim.bo.buftype == "" then
-			-- silent! 忽略报错 (比如只读文件)
-			vim.cmd("silent! w")
-			-- 或者用 "silent! wa" 保存所有文件
+		local has_file = vim.api.nvim_buf_get_name(0) ~= ""
+		if
+			has_file
+			and vim.bo.modified
+			and vim.bo.buftype == ""
+			and vim.bo.modifiable
+			and not vim.bo.readonly
+		then
+			vim.cmd("silent! update")
 		end
 	end,
 	desc = "Auto save on focus loss or buffer leave",
