@@ -22,8 +22,6 @@ return {
 		on_toggle = function(is_hidden)
 			vim.diagnostic.config({ virtual_text = is_hidden })
 		end,
-
-		dada,
 	},
 	keys = {
 		-- 常用快捷键配置

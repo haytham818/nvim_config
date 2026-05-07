@@ -25,7 +25,7 @@ return {
 				"taplo", -- TOML
 				"pyright", -- Python
 			},
-			automatic_installation = true,
+			automatic_enable = false,
 		})
 	end,
 }

@@ -11,6 +11,10 @@ return {
 		"nvim-lua/plenary.nvim",
 		"nvim-tree/nvim-web-devicons",
 		"nvim-telescope/telescope-ui-select.nvim",
+		{
+			"nvim-telescope/telescope-fzf-native.nvim",
+			build = "make",
+		},
 	},
 	config = function()
 		local telescope = require("telescope")
@@ -45,9 +49,11 @@ return {
 						previewer = true,
 					}),
 				},
+				fzf = {},
 			},
 		})
 
 		telescope.load_extension("ui-select")
+		telescope.load_extension("fzf")
 	end,
 }
