@@ -31,6 +31,7 @@ require("lazy").setup({
 	require("plugin.whichkey"),
 	require("plugin.telescope"),
 	require("plugin.comment"),
+	require("plugin.minialign"),
 	require("plugin.terminal"),
 	require("plugin.surround"),
 	require("plugin.todo"),
