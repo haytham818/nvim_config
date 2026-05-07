@@ -15,9 +15,11 @@ end
 
 -- 字体: PrimaryFont,Fallback1,Fallback2:h大小:w字宽偏移:粗细:斜体:#e-边缘:#h-微调
 -- 例: "FiraCode Nerd Font,Noto Color Emoji:h14:b"
--- 字体格式: 主字体,回退字体1,回退字体2:h字号:w字宽:粗细:斜体
--- 含空格字体名可用 _ 代替空格，或用 \ 转义
-vim.o.guifont = "BerkeleyMono Nerd Font Mono,LXGW WenKai Mono Medium:h14:#e-subpixelantialias"
+--
+-- 字体配置已移至 ~/.config/neovide/config.toml 的 [font] 块
+-- config.toml 支持独立指定 normal/bold/italic/bold_italic + features
+-- 如果要用 guifont 替代，取消下面注释：
+-- vim.o.guifont = "BerkeleyMono Nerd Font Mono,LXGW WenKai Mono Medium:h14:#e-subpixelantialias"
 
 -- 行间距
 -- vim.opt.linespace = 0
