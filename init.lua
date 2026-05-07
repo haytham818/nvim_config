@@ -28,3 +28,6 @@ require("config.theme")
 require("plugin.plugins")
 require("config.autocmd")
 require("lsp")
+
+-- Neovide GUI
+require("config.neovide")
