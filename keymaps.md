@@ -10,6 +10,7 @@
   - [文件浏览器 (Neo-tree)](#文件浏览器-neo-tree)
   - [模糊查找 (Telescope)](#模糊查找-telescope)
   - [Git 集成 (LazyGit)](#git-集成-lazygit)
+  - [Git Hunk (Gitsigns)](#git-hunk-gitsigns)
   - [终端 (ToggleTerm)](#终端-toggleterm)
   - [代码格式化 (Conform)](#代码格式化-conform)
   - [注释 (Comment)](#注释-comment)
@@ -21,6 +22,7 @@
   - [文本对象 (Text Objects)](#文本对象-text-objects)
   - [剪贴板历史 (Yanky)](#剪贴板历史-yanky)
   - [Quickfix 增强 (Quicker)](#quickfix-增强-quicker)
+  - [诊断列表 (Trouble)](#诊断列表-trouble)
   - [窗口聚焦 (Focus)](#窗口聚焦-focus)
   - [Markdown 预览 (Markview)](#markdown-预览-markview)
   - [动作提示 (Precognition)](#动作提示-precognition)
@@ -241,6 +243,29 @@
 
 ---
 
+### Git Hunk (Gitsigns)
+
+| 键位          | 模式             | 功能                       |
+| ------------- | ---------------- | -------------------------- |
+| `]h`          | Normal           | 跳转到下一个 Git hunk      |
+| `[h`          | Normal           | 跳转到上一个 Git hunk      |
+| `<leader>gs`  | Normal, Visual   | Stage 当前/选中 Git hunk   |
+| `<leader>gr`  | Normal, Visual   | Reset 当前/选中 Git hunk   |
+| `<leader>gS`  | Normal           | Stage 当前缓冲区           |
+| `<leader>gR`  | Normal           | Reset 当前缓冲区           |
+| `<leader>gp`  | Normal           | 预览当前 Git hunk          |
+| `<leader>gi`  | Normal           | 内联预览当前 Git hunk      |
+| `<leader>gb`  | Normal           | 显示当前行 blame           |
+| `<leader>gd`  | Normal           | Diff 当前缓冲区            |
+| `<leader>gD`  | Normal           | Diff 当前缓冲区上一版      |
+| `<leader>gq`  | Normal           | 当前缓冲区 hunks 到列表    |
+| `<leader>gQ`  | Normal           | 全仓库 hunks 到列表        |
+| `<leader>gtb` | Normal           | 切换当前行 blame 虚拟文本  |
+| `<leader>gtw` | Normal           | 切换 word diff             |
+| `ih`          | Operator, Visual | 选中当前 Git hunk 文本对象 |
+
+---
+
 ### 终端 (ToggleTerm)
 
 | 键位     | 模式     | 功能                   |
@@ -415,6 +440,19 @@ nvim-surround 提供了强大的环绕操作功能：
 
 - `>` - 展开上下文
 - `<` - 折叠上下文
+
+---
+
+### 诊断列表 (Trouble)
+
+| 键位         | 模式   | 功能                       |
+| ------------ | ------ | -------------------------- |
+| `<leader>xx` | Normal | 切换全局诊断列表           |
+| `<leader>xX` | Normal | 切换当前缓冲区诊断列表     |
+| `<leader>xs` | Normal | 切换文档符号列表           |
+| `<leader>xl` | Normal | 切换 LSP 定义/引用等位置   |
+| `<leader>xL` | Normal | 切换 Location List         |
+| `<leader>xQ` | Normal | 切换 Quickfix List         |
 
 ---
 

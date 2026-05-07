@@ -26,6 +26,7 @@
 | **Conform.nvim** | [Config](lua/plugin/conform.lua)   | [Github](https://github.com/stevearc/conform.nvim)   | 轻量级代码格式化工具 (支持多种语言)       |
 | **LuaSnip**      | [Config](lua/plugin/luasnip.lua)   | [Github](https://github.com/L3MON4D3/LuaSnip)        | 代码片段引擎，配合 Friendly Snippets 使用 |
 | **Corn.nvim**    | [Config](lua/plugin/corn.lua)      | [Github](https://github.com/RaafatTurki/corn.nvim)   | 优化 LSP 诊断信息的显示，保持界面整洁     |
+| **Trouble.nvim** | [Config](lua/plugin/trouble.lua)   | [Github](https://github.com/folke/trouble.nvim)      | 聚合诊断、引用、符号和 Quickfix/Loclist   |
 | **Inc-Rename**   | [Config](lua/plugin/increname.lua) | [Github](https://github.com/smjonas/inc-rename.nvim) | 重命名时提供实时预览                      |
 
 #### 🔭 导航与文件管理 (Navigation)
@@ -60,6 +61,7 @@
 | -------------------- | ------------------------------------ | ---------------------------------------------------- | ------------------------ |
 | **Lazy.nvim**        | [Config](lua/plugin/plugins.lua)     | [Github](https://github.com/folke/lazy.nvim)         | 插件管理器               |
 | **Lazygit.nvim**     | [Config](lua/plugin/lazygit.lua)     | [Github](https://github.com/kdheepak/lazygit.nvim)   | 在 Neovim 中集成 LazyGit |
+| **Gitsigns.nvim**    | [Config](lua/plugin/gitsigns.lua)    | [Github](https://github.com/lewis6991/gitsigns.nvim) | Git hunk、blame 和 diff   |
 | **Toggleterm.nvim**  | [Config](lua/plugin/terminal.lua)    | [Github](https://github.com/akinsho/toggleterm.nvim) | 快速打开/隐藏浮动终端    |
 | **Persistence.nvim** | [Config](lua/plugin/persistence.lua) | [Github](https://github.com/folke/persistence.nvim)  | 自动保存和恢复编辑会话   |
 
