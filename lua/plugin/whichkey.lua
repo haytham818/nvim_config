@@ -24,7 +24,6 @@ return {
 
 		win = {
 			border = "rounded",
-			position = "bottom",
 		},
 	},
 	keys = {
