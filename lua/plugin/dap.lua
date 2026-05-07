@@ -87,6 +87,7 @@ return {
 		require("mason-nvim-dap").setup({
 			ensure_installed = {
 				"codelldb", -- C/C++/Rust
+				"coreclr", -- C#/.NET
 				"python", -- Python (debugpy)
 			},
 			handlers = {
@@ -96,23 +97,49 @@ return {
 			},
 		})
 
-		-- C# 配置 (netcoredbg, 仅 Windows)
-		if vim.fn.has("win32") == 1 then
-			dap.adapters.coreclr = {
-				type = "executable",
-				command = vim.fn.stdpath("data") .. "/mason/bin/netcoredbg",
-				args = { "--interpreter=vscode" },
-			}
-			dap.configurations.cs = {
-				{
-					type = "coreclr",
-					name = "launch - netcoredbg",
-					request = "launch",
-					program = function()
-						return vim.fn.input("Path to dll: ", vim.fn.getcwd() .. "/bin/Debug/", "file")
-					end,
-				},
-			}
+		local netcoredbg = vim.fn.exepath("netcoredbg")
+		if netcoredbg == "" then
+			netcoredbg = vim.fn.stdpath("data") .. "/mason/bin/netcoredbg"
 		end
+
+		dap.adapters.coreclr = {
+			type = "executable",
+			command = netcoredbg,
+			args = { "--interpreter=vscode" },
+			options = vim.fn.has("win32") == 1 and { detached = false } or nil,
+		}
+
+		local function pick_debug_dll()
+			local root = vim.fs.root(0, function(name, _)
+				return name:match("%.slnx?$") ~= nil or name:match("%.csproj$") ~= nil
+			end) or vim.fn.getcwd()
+			local dlls = vim.fn.glob(vim.fs.joinpath(root, "bin", "Debug", "**", "*.dll"), false, true)
+
+			if #dlls == 1 then
+				return dlls[1]
+			end
+
+			if #dlls > 1 then
+				return coroutine.create(function(coro)
+					vim.ui.select(dlls, { prompt = "Select debug DLL:" }, function(choice)
+						coroutine.resume(coro, choice)
+					end)
+				end)
+			end
+
+			return vim.fn.input("Path to dll: ", vim.fs.joinpath(root, "bin", "Debug") .. "/", "file")
+		end
+
+		dap.configurations.cs = {
+			{
+				type = "coreclr",
+				name = "Launch .NET project DLL",
+				request = "launch",
+				program = pick_debug_dll,
+				cwd = "${workspaceFolder}",
+				console = "integratedTerminal",
+				stopAtEntry = false,
+			},
+		}
 	end,
 }
