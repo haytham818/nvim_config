@@ -18,6 +18,8 @@ else
 	-- Unix: prefer zsh if available
 	if vim.fn.executable("zsh") == 1 then
 		vim.opt.shell = "zsh"
+	else
+		vim.opt.shell = "bash"
 	end
 end
 
