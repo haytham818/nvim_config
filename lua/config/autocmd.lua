@@ -1,12 +1,11 @@
--- 1. 设置 hover 的触发时间（毫秒）
--- 默认是 4000ms (4秒)，太慢了，建议设为 300ms 或 500ms
+-- 设置 hover
 vim.opt.updatetime = 300
 
 -- 2. 创建自动命令：当光标停留时打开诊断浮窗（仅当有诊断信息时）
 vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 	group = vim.api.nvim_create_augroup("float_diagnostic", { clear = true }),
 	callback = function()
-		-- 只有当前行存在诊断信息时才弹窗，避免空消耗
+		-- 只有当前行存在诊断信息时才弹窗
 		local diagnostics = vim.diagnostic.get(0, { lnum = vim.fn.line(".") - 1 })
 		if #diagnostics == 0 then
 			return
@@ -14,9 +13,9 @@ vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 		vim.diagnostic.open_float(nil, {
 			focus = false, -- 弹窗时不抢夺焦点
 			scope = "cursor", -- 仅显示光标下的错误
-			header = false, -- 隐藏标题，更简洁
-			source = "always", -- 显示错误来源 (如 Pyright, Lua_ls)
-			border = "rounded", -- 圆角边框 (美观)
+			header = false, -- 隐藏标题
+			source = "always", -- 显示错误来源 lsp
+			border = "rounded", -- 圆角边框
 		})
 	end,
 })
@@ -45,14 +44,13 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "WinEnter", "FocusGained" }, {
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "html", "htmldjango", "vue" },
 	callback = function()
-		-- 1. 禁用 smartindent (这是罪魁祸首)
+		-- 1. 禁用 smartindent
 		vim.opt_local.smartindent = false
-		-- 2. 禁用 cindent (C语言风格缩进也不适合HTML)
+		-- 2. 禁用 cindent
 		vim.opt_local.cindent = false
-		-- 3. 确保 indentexpr 是由 Treesitter 接管的
-		-- (通常 Treesitter 会自动设置这个，但我们为了保险起见)
+		-- 3. 确保 indentexpr 是 Treesitter
 		vim.opt_local.indentexpr = "nvim_treesitter#indent()"
-		-- 4. 开启基础缩进
+		-- 4. 开启缩进
 		vim.opt_local.autoindent = true
 	end,
 })
@@ -61,16 +59,10 @@ local save_group = vim.api.nvim_create_augroup("AutoSave", { clear = true })
 
 vim.api.nvim_create_autocmd({ "FocusLost", "BufLeave" }, {
 	group = save_group,
-	pattern = "*", -- 对所有文件生效
+	pattern = "*", -- 所有文件
 	callback = function()
 		local has_file = vim.api.nvim_buf_get_name(0) ~= ""
-		if
-			has_file
-			and vim.bo.modified
-			and vim.bo.buftype == ""
-			and vim.bo.modifiable
-			and not vim.bo.readonly
-		then
+		if has_file and vim.bo.modified and vim.bo.buftype == "" and vim.bo.modifiable and not vim.bo.readonly then
 			vim.cmd("silent! update")
 		end
 	end,

@@ -18,10 +18,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		keymap.set("n", "gi", lsp.buf.implementation, bufopts)
 		keymap.set("n", "<space>rn", lsp.buf.rename, bufopts)
 		keymap.set("n", "K", lsp.buf.hover, bufopts)
-		-- use conform.nvim
-		-- keymap.set("n", "<space>f", function()
-		-- 	vim.lsp.buf.format({ async = true })
-		-- end, bufopts)
 		keymap.set("n", "<leader>ca", lsp.buf.code_action, vim.tbl_extend("force", bufopts, { desc = "Code Action" }))
 
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
@@ -64,7 +60,6 @@ vim.lsp.enable({
 	"roslyn_ls",
 	"clangd",
 	"neocmake",
-	-- taplo LSP 禁用 (schema catalog 拉取报错, 格式化由 conform.nvim 的 taplo CLI 处理)
 	"stylua",
 	"rust_analyzer",
 	"lua_ls",
