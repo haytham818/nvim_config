@@ -15,18 +15,15 @@ return {
 	},
 	config = function()
 		require("toggleterm").setup({
-			-- 1. 设置打开/关闭终端的快捷键
-			-- 这里设置为 Ctrl + \ (反斜杠)
 			open_mapping = [[<c-\>]],
 
-			-- 2. 设置终端打开的方向
-			-- 可选值: 'vertical' | 'horizontal' | 'tab' | 'float'
+			-- 'vertical' | 'horizontal' | 'tab' | 'float'
 			direction = "float",
 
-			-- 3. 设置浮动窗口的样式
+			-- 浮动窗口
 			float_opts = {
-				border = "curved", -- 圆角边框
-				winblend = 1.0, -- 透明度 (0是不透明)
+				border = "curved",
+				winblend = 1.0,
 			},
 
 			on_open = function(term)
@@ -37,10 +34,8 @@ return {
 			end,
 
 			shell = vim.o.shell,
-			-- shell = "pwsh",
 		})
 
-		-- 终端 keymaps: 使用 augroup 确保不会重复注册
 		local term_group = vim.api.nvim_create_augroup("ToggleTermKeymaps", { clear = true })
 		vim.api.nvim_create_autocmd("TermOpen", {
 			group = term_group,

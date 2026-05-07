@@ -1,13 +1,12 @@
 return {
 	"mfussenegger/nvim-dap",
 	dependencies = {
-		"rcarriga/nvim-dap-ui", -- 漂亮的调试界面
-		"nvim-neotest/nvim-nio", -- dap-ui 的依赖
-		"jay-babu/mason-nvim-dap.nvim", -- 桥接 mason 和 dap
+		"rcarriga/nvim-dap-ui",
+		"nvim-neotest/nvim-nio",
+		"jay-babu/mason-nvim-dap.nvim",
 	},
 	event = "VeryLazy",
 	keys = {
-		-- 常用调试快捷键 (F5/F10/F11/F12 是通用标准)
 		{
 			"<F5>",
 			function()
@@ -69,10 +68,8 @@ return {
 		local dap = require("dap")
 		local dapui = require("dapui")
 
-		-- 1. 初始化图形界面
 		dapui.setup()
 
-		-- 2. 自动打开/关闭调试界面
 		dap.listeners.before.attach.dapui_config = function()
 			dapui.open()
 		end
@@ -88,27 +85,16 @@ return {
 
 		-- 3. 集成 Mason，自动安装调试器
 		require("mason-nvim-dap").setup({
-			-- 确保安装这些调试器 (根据你用的语言调整)
 			ensure_installed = {
 				"codelldb", -- C/C++/Rust
 				"python", -- Python (debugpy)
 			},
-			-- 自动配置 handlers (核心功能)
-			-- 这会尝试自动为 mason 安装的调试器设置 dap 配置
 			handlers = {
 				function(config)
 					require("mason-nvim-dap").default_setup(config)
 				end,
-				-- 如果某个特定语言需要特殊配置，可以在这里单独写
-				-- 例如 python:
-				-- python = function(config)
-				--     config.adapters.python = { ... }
-				--     require('mason-nvim-dap').default_setup(config)
-				-- end,
 			},
 		})
-
-		-- 5. 语言特定配置补充
 
 		-- C# 配置 (netcoredbg, 仅 Windows)
 		if vim.fn.has("win32") == 1 then

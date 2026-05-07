@@ -3,7 +3,6 @@ return {
 	event = { "BufWritePre" },
 	cmd = { "ConformInfo" },
 
-	-- 将快捷键定义移到 Lazy 的 keys 模块中，更规范
 	keys = {
 		{
 			"<leader>cf",
@@ -28,7 +27,6 @@ return {
 			cs = { "csharpier" },
 			rust = { "rustfmt", lsp_format = "fallback" },
 			zig = { "zigfmt" },
-			-- Web 全家桶
 			javascript = { "prettier" },
 			typescript = { "prettier" },
 			javascriptreact = { "prettier" },
@@ -41,17 +39,15 @@ return {
 			python = { "isort", "black" },
 		},
 
-		-- 3. 自动保存配置
 		format_on_save = function(bufnr)
-			-- 如果设置了禁用，则跳过
 			if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
 				return
 			end
 
 			return {
-				timeout_ms = 3000, -- 4. 关键：这里也要改成 3000ms
-				lsp_format = "fallback", -- 保持一致
-				async = false, -- 保存时建议阻塞，防止写入冲突
+				timeout_ms = 3000,
+				lsp_format = "fallback",
+				async = false,
 			}
 		end,
 

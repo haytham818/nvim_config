@@ -78,33 +78,32 @@ return {
 
 				-- 2. 日期和时间 (非常实用)
 				augend.date.alias["%Y/%m/%d"], -- 2025/12/09
-				augend.date.alias["%Y-%m-%d"], -- 2023-12-23 (写日志/注释常用)
+				augend.date.alias["%Y-%m-%d"], -- 2023-12-23
 				augend.date.alias["%H:%M"], -- 15:22
 
 				-- 3. 编程逻辑常量
-				augend.constant.alias.bool, -- false <-> true (支持 Python True/False)
+				augend.constant.alias.bool, -- false <-> true
 
-				-- 4. 逻辑运算符 (写 C++/Rust 时的神器)
+				-- 4. 逻辑运算符
 				augend.constant.new({
 					elements = { "||", "&&" },
-					word = false, -- 不需要完全匹配单词，符号也可以
-					cyclic = true, -- 循环切换
+					word = false,
+					cyclic = true,
 				}),
 
-				-- 5. 声明关键字 (JS/TS/Rust 常用)
+				-- 5. 变量声明关键字
 				augend.constant.new({
 					elements = { "let", "const" },
 					word = true,
 					cyclic = true,
 				}),
 
-				-- 6. CSS 颜色 (Web 开发神器)
-				-- 可以在 #fbfefd 和 #020002 之间增加/减少数值
+				-- 6. 颜色
 				augend.hexcolor.new({
 					case = "lower",
 				}),
 
-				-- 7. 大小写转换 (可选)
+				-- 7. 大小写转换
 				augend.case.new({
 					types = { "snake_case", "PascalCase", "SCREAMING_SNAKE_CASE" },
 					cyclic = true,

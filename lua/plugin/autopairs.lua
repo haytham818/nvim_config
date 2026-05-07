@@ -3,7 +3,7 @@ return {
 	event = "InsertEnter",
 	opts = {
 		map_cr = true,
-	}, -- 使用默认配置即可
+	}, -- 默认配置
 	config = function()
 		require("nvim-autopairs").setup({
 			check_ts = true,

@@ -2,10 +2,9 @@ return {
 	"numToStr/Comment.nvim",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
-		"JoosepAlviste/nvim-ts-context-commentstring", -- 依赖这个插件来判断上下文
+		"JoosepAlviste/nvim-ts-context-commentstring",
 	},
 	config = function()
-		-- 安全加载 context-commentstring
 		local pre_hook = nil
 		local status, ts_context = pcall(require, "ts_context_commentstring.integrations.comment_nvim")
 		if status then
@@ -18,12 +17,12 @@ return {
 
 		-- 基础映射配置 (保持默认即可，为了让你了解我列出来了)
 			toggler = {
-				line = "gcc", -- 行注释
-				block = "gbc", -- 块注释
+				line = "gcc",
+				block = "gbc",
 			},
 			opleader = {
-				line = "gc", -- 配合动作，如 gc2j (注释下两行)
-				block = "gb", -- 配合动作
+				line = "gc",
+				block = "gb",
 			},
 		})
 	end,

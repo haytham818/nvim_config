@@ -18,25 +18,24 @@ return {
 
 		-- 2. 文件系统配置
 		filesystem = {
-			bind_to_cwd = false, -- true: 随工作目录变化; false: 随当前文件变化 (推荐 false)
+			bind_to_cwd = false,
 			follow_current_file = {
-				enabled = true, -- 打开文件时，自动在树中定位到该文件
-				leave_dirs_open = false, -- 自动关闭不相关的文件夹 (保持整洁)
+				enabled = true,
+				leave_dirs_open = true,
 			},
-			use_libuv_file_watcher = true, -- 文件变动时自动刷新 (非常重要!)
+			use_libuv_file_watcher = true,
 			filtered_items = {
-				visible = true, -- 是否显示隐藏文件 (默认灰度显示)
+				visible = true,
 				hide_dotfiles = false,
 				hide_gitignored = true,
 			},
 			components = {
 				arrow_status = function(config, node, state)
 					local arrow_status = require("arrow.statusline")
-					-- 检查当前节点路径是否在 arrow 列表中
 					if arrow_status.is_on_arrow_file(node.path) then
 						return {
-							text = " ", -- 你可以换成 "🏹" 或 "★"
-							highlight = "DiagnosticWarn", -- 使用黄色或你喜欢的颜色组
+							text = " ",
+							highlight = "DiagnosticWarn",
 						}
 					end
 					return {}
@@ -50,7 +49,6 @@ return {
 						"container",
 						content = {
 							{ "name", zindex = 10 },
-							-- 🔥 把我们的自定义组件放在文件名后面
 							{ "arrow_status", zindex = 10 },
 							{ "clipboard", zindex = 10 },
 							{ "bufnr", zindex = 10 },
@@ -69,14 +67,12 @@ return {
 			width = 30,
 			mappings = {
 				["<space>"] = "none", -- 解除空格键映射，防止冲突
-				["l"] = "open", -- 用 l 打开文件 (符合 vim 方向键习惯)
+				["l"] = "open", -- 用 l 打开文件
 				["h"] = "close_node", -- 用 h 收起文件夹
 			},
 		},
 
-		-- 4. 事件处理 (解决常见痛点)
 		event_handlers = {
-			-- 打开文件后自动关闭 Neo-tree (可选，如果你喜欢像 VS Code 那样常驻，请注释掉这段)
 			{
 				event = "file_opened",
 				handler = function(file_path)

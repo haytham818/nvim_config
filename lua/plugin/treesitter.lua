@@ -1,7 +1,7 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
-	build = ":TSUpdate", -- 安装/更新插件时，自动更新语法解析器
-	event = { "BufReadPost", "BufNewFile" }, -- 打开文件时才加载，提升启动速度
+	build = ":TSUpdate",
+	event = { "BufReadPost", "BufNewFile" },
 	branch = "master",
 	config = function()
 		require("nvim-treesitter.configs").setup({
