@@ -6,6 +6,7 @@ return {
 		{ "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Telescope live grep" },
 		{ "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Telescope buffers" },
 		{ "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Telescope help tags" },
+		{ "<leader>fp", "<cmd>Telescope projects<cr>", desc = "Telescope projects" },
 	},
 	dependencies = {
 		"nvim-lua/plenary.nvim",
@@ -50,10 +51,12 @@ return {
 					}),
 				},
 				fzf = {},
+				projects = {},
 			},
 		})
 
 		telescope.load_extension("ui-select")
 		telescope.load_extension("fzf")
+		telescope.load_extension("projects")
 	end,
 }

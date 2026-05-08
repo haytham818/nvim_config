@@ -29,6 +29,7 @@ require("lazy").setup({
 	require("plugin.blankline"),
 	require("plugin.autopairs"),
 	require("plugin.whichkey"),
+	require("plugin.project"),
 	require("plugin.telescope"),
 	require("plugin.comment"),
 	require("plugin.minialign"),

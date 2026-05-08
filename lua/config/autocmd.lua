@@ -1,7 +1,7 @@
 -- 设置 hover
 vim.opt.updatetime = 300
 
--- 2. 创建自动命令：当光标停留时打开诊断浮窗（仅当有诊断信息时）
+-- 当光标停留时打开诊断浮窗（仅当有诊断信息时）
 vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 	group = vim.api.nvim_create_augroup("float_diagnostic", { clear = true }),
 	callback = function()
@@ -67,4 +67,16 @@ vim.api.nvim_create_autocmd({ "FocusLost", "BufLeave" }, {
 		end
 	end,
 	desc = "Auto save on focus loss or buffer leave",
+})
+
+-- 替换启动界面
+vim.api.nvim_create_autocmd("VimEnter", {
+	group = vim.api.nvim_create_augroup("StartupTelescope", { clear = true }),
+	callback = function()
+		if vim.fn.argc() == 0 and vim.api.nvim_buf_get_name(0) == "" then
+			vim.schedule(function()
+				require("telescope").extensions.projects.projects({})
+			end)
+		end
+	end,
 })
