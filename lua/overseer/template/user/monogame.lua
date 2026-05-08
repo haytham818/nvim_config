@@ -127,14 +127,9 @@ return {
 			)
 			table.insert(
 				tasks,
-				make_dotnet_task(
-					"MonoGame: build content",
-					make_mgcb_build_args(root, content_file),
-					root,
-					{
-						TAG.BUILD,
-					}
-				)
+				make_dotnet_task("MonoGame: build content", make_mgcb_build_args(root, content_file), root, {
+					TAG.BUILD,
+				})
 			)
 		end
 

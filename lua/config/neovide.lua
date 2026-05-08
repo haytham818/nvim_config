@@ -19,7 +19,7 @@ end
 -- vim.o.guifont = "BerkeleyMono Nerd Font Mono,LXGW WenKai Mono Medium:h14:#e-subpixelantialias"
 
 -- 行间距
-vim.opt.linespace = 1.2
+vim.opt.linespace = 0
 
 -- 全局缩放系数（× OS 缩放 × 字体大小）
 -- vim.g.neovide_scale_factor = 1.0
