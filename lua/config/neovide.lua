@@ -141,7 +141,7 @@ vim.g.neovide_progress_bar_enabled = true
 -- vim.g.neovide_cursor_trail_size = 1.0
 
 -- 光标抗锯齿（关闭可能修复某些光标显示问题）
-vim.g.neovide_cursor_antialiasing = true
+vim.g.neovide_cursor_antialiasing = false
 
 -- 插入模式下播放光标动画
 vim.g.neovide_cursor_animate_in_insert_mode = true
