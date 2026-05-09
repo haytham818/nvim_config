@@ -18,6 +18,13 @@ local git_status_hl = {
 	ignored = "OilGitIgnored",
 }
 
+local diagnostic_status = {
+	[vim.diagnostic.severity.ERROR] = { text = "E", hl = "DiagnosticError" },
+	[vim.diagnostic.severity.WARN] = { text = "W", hl = "DiagnosticWarn" },
+	[vim.diagnostic.severity.INFO] = { text = "I", hl = "DiagnosticInfo" },
+	[vim.diagnostic.severity.HINT] = { text = "H", hl = "DiagnosticHint" },
+}
+
 local status_priority = {
 	["!"] = 1,
 	["?"] = 2,
@@ -113,6 +120,49 @@ local function parse_git_status(proc, prefix)
 	return statuses
 end
 
+local function join_path(dir, name)
+	if dir:sub(-1) == "/" then
+		return dir .. name
+	end
+	return dir .. "/" .. name
+end
+
+local function normalize_path(path)
+	return vim.fn.fnamemodify(path, ":p"):gsub("/$", "")
+end
+
+local function path_contains(parent, child)
+	return child == parent or vim.startswith(child, parent .. "/")
+end
+
+local function get_diagnostic_status(path, is_dir)
+	local target = normalize_path(path)
+	local counts = {}
+
+	for _, diagnostic in ipairs(vim.diagnostic.get(nil)) do
+		local name = vim.api.nvim_buf_get_name(diagnostic.bufnr)
+		if name ~= "" then
+			local diagnostic_path = normalize_path(name)
+			if diagnostic_path == target or (is_dir and path_contains(target, diagnostic_path)) then
+				counts[diagnostic.severity] = (counts[diagnostic.severity] or 0) + 1
+			end
+		end
+	end
+
+	for _, severity in ipairs({
+		vim.diagnostic.severity.ERROR,
+		vim.diagnostic.severity.WARN,
+		vim.diagnostic.severity.INFO,
+		vim.diagnostic.severity.HINT,
+	}) do
+		local count = counts[severity]
+		if count then
+			local status = diagnostic_status[severity]
+			return { status.text .. count, status.hl }
+		end
+	end
+end
+
 local function new_git_status()
 	return setmetatable({}, {
 		__index = function(self, dir)
@@ -159,9 +209,9 @@ return {
 		{
 			"<leader>e",
 			function()
-				require("oil").open()
+				require("oil").open(nil, { preview = { vertical = true, split = "belowright" } })
 			end,
-			desc = "Open Oil",
+			desc = "Open Oil with preview",
 		},
 		{
 			"-",
@@ -208,12 +258,28 @@ return {
 			end,
 		})
 
+		require("oil.columns").register("lsp_status", {
+			render = function(entry, _, bufnr)
+				local dir = require("oil").get_current_dir(bufnr)
+				if not dir then
+					return nil
+				end
+				local name = entry[2]
+				local entry_type = entry[3]
+				return get_diagnostic_status(join_path(dir, name), entry_type == "directory")
+			end,
+			parse = function(line)
+				return line:match("^(%S+)%s+(.*)$")
+			end,
+		})
+
 		require("oil").setup({
 			default_file_explorer = true,
 			columns = {
 				"size",
 				"mtime",
 				"git_status",
+				"lsp_status",
 				"icon",
 			},
 			delete_to_trash = true,
@@ -222,7 +288,7 @@ return {
 			keymaps = {
 				["<C-s>"] = { "actions.select", opts = { vertical = true } },
 				["<C-h>"] = { "actions.select", opts = { horizontal = true } },
-				["<C-p>"] = "actions.preview",
+				["<C-p>"] = { "actions.preview", opts = { vertical = true, split = "belowright" } },
 				["<C-c>"] = { "actions.close", mode = "n" },
 				["<C-l>"] = "actions.refresh",
 				["q"] = { "actions.close", mode = "n" },
@@ -230,7 +296,7 @@ return {
 				["g."] = { "actions.toggle_hidden", mode = "n" },
 			},
 			view_options = {
-				show_hidden = false,
+				show_hidden = true,
 				is_hidden_file = function(name, bufnr)
 					local dir = require("oil").get_current_dir(bufnr)
 					if not dir then
@@ -251,6 +317,17 @@ return {
 				border = "rounded",
 				win_options = {
 					winblend = 0,
+				},
+				preview_split = "right",
+			},
+			preview_win = {
+				update_on_cursor_moved = true,
+				preview_method = "fast_scratch",
+				win_options = {
+					number = true,
+					relativenumber = false,
+					signcolumn = "yes",
+					wrap = false,
 				},
 			},
 			confirmation = {
