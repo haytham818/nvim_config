@@ -21,7 +21,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		keymap.set("n", "<leader>ca", lsp.buf.code_action, vim.tbl_extend("force", bufopts, { desc = "Code Action" }))
 
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
-		if client and client.server_capabilities.inlayHintProvider then
+		local roslyn_buffer = client and client.name == "roslyn_ls"
+
+		if client and client.server_capabilities.inlayHintProvider and not roslyn_buffer then
 			vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
 		end
 

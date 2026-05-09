@@ -25,6 +25,29 @@ local uv = vim.uv
 local fs = vim.fs
 
 local group = vim.api.nvim_create_augroup("lspconfig.roslyn_ls", { clear = true })
+local source_generated_pattern = "^roslyn%-source%-generated://"
+
+---@param path string
+---@return string?
+local function find_solution_in_dir(path)
+	for entry, type in fs.dir(path) do
+		if type == "file" and (vim.endswith(entry, ".sln") or vim.endswith(entry, ".slnx")) then
+			return fs.joinpath(path, entry)
+		end
+	end
+end
+
+---@param bufname string
+---@return boolean
+local function is_source_generated(bufname)
+	return bufname:match(source_generated_pattern) ~= nil
+end
+
+local function request_source_generated_content(client, uri, bufnr, handler)
+	client:request("workspace/textDocumentContent", {
+		uri = uri,
+	}, handler, bufnr)
+end
 
 ---@param client vim.lsp.Client
 ---@param target string
@@ -64,11 +87,49 @@ end
 
 local function roslyn_handlers()
 	return {
+		["client/registerCapability"] = function(err, result, ctx)
+			if result and result.registrations then
+				for _, reg in ipairs(result.registrations) do
+					if reg.method == "workspace/didChangeWatchedFiles" then
+						reg.registerOptions = reg.registerOptions or {}
+						reg.registerOptions.watchers = {}
+					end
+				end
+			end
+
+			return vim.lsp.handlers["client/registerCapability"](err, result, ctx)
+		end,
 		["workspace/projectInitializationComplete"] = function(_, _, ctx)
 			vim.notify("Roslyn project initialization complete", vim.log.levels.INFO, { title = "roslyn_ls" })
 			local client = assert(vim.lsp.get_client_by_id(ctx.client_id))
 			refresh_diagnostics(client)
 			return vim.NIL
+		end,
+		["workspace/textDocumentContent/refresh"] = function(_, params, ctx)
+			local client = assert(vim.lsp.get_client_by_id(ctx.client_id))
+			for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+				local uri = vim.api.nvim_buf_get_name(buf)
+				local should_refresh = not params or params == vim.NIL or params.uri == uri
+				if should_refresh and vim.api.nvim_buf_is_loaded(buf) and is_source_generated(uri) then
+					request_source_generated_content(client, uri, buf, function(err, result)
+						if err then
+							vim.notify(err.message or vim.inspect(err), vim.log.levels.ERROR, { title = "roslyn_ls" })
+							return
+						end
+
+						local content = result.text or ""
+						if content == vim.NIL then
+							content = ""
+						end
+
+						local lines = vim.split(content:gsub("\r\n", "\n"), "\n", { plain = true })
+						vim.bo[buf].modifiable = true
+						vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+						vim.bo[buf].modifiable = false
+						vim.bo[buf].modified = false
+					end, buf)
+				end
+			end
 		end,
 		["workspace/_roslyn_projectNeedsRestore"] = function(_, result, ctx)
 			local client = assert(vim.lsp.get_client_by_id(ctx.client_id))
@@ -108,6 +169,58 @@ local function is_decompiled(bufname)
 	return vim.fn.finddir(bufname:sub(1, endpos), uv.os_tmpdir()) ~= ""
 end
 
+vim.api.nvim_create_autocmd("BufReadCmd", {
+	group = group,
+	pattern = "roslyn-source-generated://*",
+	callback = function(args)
+		vim.bo[args.buf].modifiable = true
+		vim.bo[args.buf].swapfile = false
+		vim.bo[args.buf].filetype = "cs"
+
+		local client = vim.lsp.get_clients({ name = "roslyn_ls", bufnr = args.buf })[1]
+			or vim.lsp.get_clients({ name = "roslyn_ls" })[1]
+
+		if client then
+			vim.lsp.buf_attach_client(args.buf, client.id)
+		else
+			vim.wait(5000, function()
+				client = vim.lsp.get_clients({ name = "roslyn_ls", bufnr = args.buf })[1]
+					or vim.lsp.get_clients({ name = "roslyn_ls" })[1]
+				return client ~= nil
+			end)
+		end
+
+		if not client then
+			vim.notify("roslyn_ls: source generated file opened without an active Roslyn client", vim.log.levels.ERROR)
+			return
+		end
+
+		local loaded = false
+		request_source_generated_content(client, args.match, args.buf, function(err, result)
+			if err then
+				vim.notify(err.message or vim.inspect(err), vim.log.levels.ERROR, { title = "roslyn_ls" })
+				loaded = true
+				return
+			end
+
+			local content = result.text or ""
+			if content == vim.NIL then
+				content = ""
+			end
+
+			local lines = vim.split(content:gsub("\r\n", "\n"), "\n", { plain = true })
+			vim.api.nvim_buf_set_lines(args.buf, 0, -1, false, lines)
+			vim.bo[args.buf].modifiable = false
+			vim.bo[args.buf].modified = false
+			loaded = true
+		end)
+
+		vim.wait(5000, function()
+			return loaded
+		end)
+	end,
+})
+
 ---@type vim.lsp.Config
 return {
 	name = "roslyn_ls",
@@ -119,6 +232,10 @@ return {
 		"--extensionLogDirectory",
 		fs.joinpath(uv.os_tmpdir(), "roslyn_ls/logs"),
 		"--stdio",
+	},
+	cmd_env = {
+		Configuration = vim.env.Configuration or "Debug",
+		TMPDIR = vim.env.TMPDIR and vim.fn.resolve(vim.env.TMPDIR) or nil,
 	},
 	filetypes = { "cs" },
 	handlers = roslyn_handlers(),
@@ -156,7 +273,21 @@ return {
 		local bufname = vim.api.nvim_buf_get_name(bufnr)
 		-- don't try to find sln or csproj for files from libraries
 		-- outside of the project
-		if not is_decompiled(bufname) then
+		if is_source_generated(bufname) then
+			local client = vim.lsp.get_clients({ name = "roslyn_ls" })[1]
+			if client and client.config.root_dir then
+				cb(client.config.root_dir)
+			end
+		elseif not is_decompiled(bufname) then
+			local git_root = fs.root(bufnr, ".git")
+			if git_root then
+				local git_solution = find_solution_in_dir(git_root)
+				if git_solution then
+					cb(git_root)
+					return
+				end
+			end
+
 			-- try find solutions root first
 			local root_dir = fs.root(bufnr, function(fname, _)
 				return fname:match("%.sln[x]?$") ~= nil
@@ -189,11 +320,10 @@ return {
 			local root_dir = client.config.root_dir
 
 			-- try load first solution we find
-			for entry, type in fs.dir(root_dir) do
-				if type == "file" and (vim.endswith(entry, ".sln") or vim.endswith(entry, ".slnx")) then
-					on_init_sln(client, fs.joinpath(root_dir, entry))
-					return
-				end
+			local solution = find_solution_in_dir(root_dir)
+			if solution then
+				on_init_sln(client, solution)
+				return
 			end
 
 			-- if no solution is found load project
@@ -206,12 +336,14 @@ return {
 	},
 
 	on_attach = function(client, bufnr)
+		client.server_capabilities.semanticTokensProvider = nil
+
 		-- avoid duplicate autocmds for same buffer
 		if vim.api.nvim_get_autocmds({ buffer = bufnr, group = group })[1] then
 			return
 		end
 
-		vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
+		vim.api.nvim_create_autocmd("BufWritePost", {
 			group = group,
 			buffer = bufnr,
 			callback = function()
@@ -228,11 +360,20 @@ return {
 				dynamicRegistration = true,
 			},
 		},
+		workspace = {
+			didChangeWatchedFiles = {
+				dynamicRegistration = true,
+				relativePatternSupport = true,
+			},
+			textDocumentContent = {
+				dynamicRegistration = true,
+			},
+		},
 	},
 	settings = {
 		["csharp|background_analysis"] = {
-			dotnet_analyzer_diagnostics_scope = "fullSolution",
-			dotnet_compiler_diagnostics_scope = "fullSolution",
+			dotnet_analyzer_diagnostics_scope = "openFiles",
+			dotnet_compiler_diagnostics_scope = "openFiles",
 		},
 		["csharp|inlay_hints"] = {
 			csharp_enable_inlay_hints_for_implicit_object_creation = true,
@@ -253,11 +394,11 @@ return {
 		},
 		["csharp|completion"] = {
 			dotnet_show_name_completion_suggestions = true,
-			dotnet_show_completion_items_from_unimported_namespaces = true,
-			dotnet_provide_regex_completions = true,
+			dotnet_show_completion_items_from_unimported_namespaces = false,
+			dotnet_provide_regex_completions = false,
 		},
 		["csharp|code_lens"] = {
-			dotnet_enable_references_code_lens = true,
+			dotnet_enable_references_code_lens = false,
 		},
 	},
 }
