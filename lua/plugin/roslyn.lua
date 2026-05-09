@@ -125,8 +125,9 @@ return {
 	"seblyng/roslyn.nvim",
 	lazy = false,
 	opts = {
-		filewatching = "off",
-		choose_target = choose_solution,
+		filewatching = "roslyn",
+		choose_target = nil,
+		broad_search = true,
 		extensions = {
 			razor = {
 				enabled = false,
