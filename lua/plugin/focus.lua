@@ -30,7 +30,7 @@ return {
 		excluded_filetypes = {
 			"toggleterm", -- 终端
 			"NvimTree", -- 文件树
-			"neo-tree", -- 文件树
+			"oil", -- 文件管理器
 			"TelescopePrompt",
 			"alpha", -- 启动页
 			"dashboard",

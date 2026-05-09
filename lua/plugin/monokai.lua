@@ -9,8 +9,6 @@ return {
         -- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
         -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
         -- vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })      -- 非当前窗口背景
-        -- vim.api.nvim_set_hl(0, "NeoTreeNormal", { bg = "none" }) -- Neo-tree 背景
-        -- vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { bg = "none" })
         -- vim.api.nvim_set_hl(0, "BufferLineFill", { bg = "none" })
         -- vim.api.nvim_set_hl(0, "BufferLineBackground", { bg = "none" })
         -- vim.api.nvim_set_hl(0, "BufferLineSeparator", { bg = "none" })

@@ -33,12 +33,11 @@ return {
 				return " " .. icon .. count
 			end,
 
-			-- 4. 侧边栏偏移配置 (非常重要！)
-			-- 这里的 filetype 填你的文件树插件，如 "neo-tree" 或 "nvimtree"
+			-- 4. 侧边栏偏移配置
 			offsets = {
 				{
-					filetype = "neo-tree",
-					text = "Neo-tree", -- 侧边栏上方显示的文字
+					filetype = "oil",
+					text = "Oil",
 					highlight = "Directory",
 					text_align = "left",
 				},

@@ -29,7 +29,7 @@ return {
 
 		filetypes = {
 			"NvimTree",
-			"neo-tree",
+			"oil",
 			"toggleterm",
 			"lazy",
 			"mason",

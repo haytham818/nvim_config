@@ -7,7 +7,7 @@
 - [文件保存 (File Saving)](#文件保存-file-saving)
 - [LSP 功能 (LSP Features)](#lsp-功能-lsp-features)
 - [插件键位 (Plugin Keymaps)](#插件键位-plugin-keymaps)
-  - [文件浏览器 (Neo-tree)](#文件浏览器-neo-tree)
+  - [文件管理器 (Oil)](#文件管理器-oil)
   - [模糊查找 (Telescope)](#模糊查找-telescope)
   - [Git 集成 (LazyGit)](#git-集成-lazygit)
   - [Git Hunk (Gitsigns)](#git-hunk-gitsigns)
@@ -202,17 +202,24 @@
 
 ## 插件键位 (Plugin Keymaps)
 
-### 文件浏览器 (Neo-tree)
+### 文件管理器 (Oil)
 
-| 键位        | 模式   | 功能           |
-| ----------- | ------ | -------------- |
-| `<leader>e` | Normal | 切换文件浏览器 |
+| 键位         | 模式   | 功能                    |
+| ------------ | ------ | ----------------------- |
+| `<leader>e`  | Normal | 打开当前文件所在目录    |
+| `-`          | Normal | 打开父目录              |
+| `<leader>-`  | Normal | 切换浮动文件管理器      |
+| `<leader>cw` | Normal | 在工作目录打开浮动 Oil  |
 
-**Neo-tree 内部键位**:
+**Oil 内部键位**:
 
-- `l` - 打开文件/文件夹
-- `h` - 收起文件夹
-- `Space` - 无操作 (已解除绑定)
+- `<CR>` - 打开文件/目录
+- `<C-s>` - 垂直分屏打开
+- `<C-h>` - 水平分屏打开
+- `<C-p>` - 预览
+- `<C-l>` - 刷新
+- `g.` - 显示/隐藏 Git 忽略项
+- `q` / `<C-c>` - 关闭
 
 ---
 
