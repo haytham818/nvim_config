@@ -60,7 +60,7 @@
 | 插件名称             | 配置文件                             | 仓库链接                                             | 简介                     |
 | -------------------- | ------------------------------------ | ---------------------------------------------------- | ------------------------ |
 | **Lazy.nvim**        | [Config](lua/plugin/plugins.lua)     | [Github](https://github.com/folke/lazy.nvim)         | 插件管理器               |
-| **Lazygit.nvim**     | [Config](lua/plugin/lazygit.lua)     | [Github](https://github.com/kdheepak/lazygit.nvim)   | 在 Neovim 中集成 LazyGit |
+| **Neogit**           | [Config](lua/plugin/neogit.lua)      | [Github](https://github.com/NeogitOrg/neogit)        | Neovim 内 Git 交互界面    |
 | **Gitsigns.nvim**    | [Config](lua/plugin/gitsigns.lua)    | [Github](https://github.com/lewis6991/gitsigns.nvim) | Git hunk、blame 和 diff   |
 | **Toggleterm.nvim**  | [Config](lua/plugin/terminal.lua)    | [Github](https://github.com/akinsho/toggleterm.nvim) | 快速打开/隐藏浮动终端    |
 | **Persistence.nvim** | [Config](lua/plugin/persistence.lua) | [Github](https://github.com/folke/persistence.nvim)  | 自动保存和恢复编辑会话   |

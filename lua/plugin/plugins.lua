@@ -40,7 +40,7 @@ require("lazy").setup({
 	require("plugin.persistence"),
 	require("plugin.luasnip"),
 	require("plugin.autotag"),
-	require("plugin.lazygit"),
+	require("plugin.neogit"),
 	require("plugin.gitsigns"),
 	require("plugin.corn"),
 	require("plugin.focus"),

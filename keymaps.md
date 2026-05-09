@@ -9,7 +9,7 @@
 - [插件键位 (Plugin Keymaps)](#插件键位-plugin-keymaps)
   - [文件管理器 (Oil)](#文件管理器-oil)
   - [模糊查找 (Telescope)](#模糊查找-telescope)
-  - [Git 集成 (LazyGit)](#git-集成-lazygit)
+  - [Git 集成 (Neogit)](#git-集成-neogit)
   - [Git Hunk (Gitsigns)](#git-hunk-gitsigns)
   - [终端 (ToggleTerm)](#终端-toggleterm)
   - [代码格式化 (Conform)](#代码格式化-conform)
@@ -242,11 +242,11 @@
 
 ---
 
-### Git 集成 (LazyGit)
+### Git 集成 (Neogit)
 
 | 键位         | 模式   | 功能         |
 | ------------ | ------ | ------------ |
-| `<leader>lg` | Normal | 打开 LazyGit |
+| `<leader>lg` | Normal | 打开 Neogit |
 
 ---
 
@@ -734,7 +734,7 @@ nvim-surround 提供了强大的环绕操作功能：
 - `:FormatToggle` - 切换保存时自动格式化
 - `:ConformInfo` - 显示格式化工具信息
 - `:Neotree` - 打开文件树
-- `:LazyGit` - 打开 LazyGit
+- `:Neogit` - 打开 Neogit
 
 ---
 
