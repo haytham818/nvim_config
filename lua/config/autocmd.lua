@@ -48,9 +48,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.opt_local.smartindent = false
 		-- 2. 禁用 cindent
 		vim.opt_local.cindent = false
-		-- 3. 确保 indentexpr 是 Treesitter
-		vim.opt_local.indentexpr = "nvim_treesitter#indent()"
-		-- 4. 开启缩进
+		-- 3. 开启缩进
 		vim.opt_local.autoindent = true
 	end,
 })

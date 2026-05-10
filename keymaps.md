@@ -20,6 +20,7 @@
   - [书签管理 (Arrow)](#书签管理-arrow)
   - [数字递增 (Dial)](#数字递增-dial)
   - [文本对象 (Text Objects)](#文本对象-text-objects)
+  - [Tree-sitter 节点选择](#tree-sitter-节点选择)
   - [剪贴板历史 (Yanky)](#剪贴板历史-yanky)
   - [Quickfix 增强 (Quicker)](#quickfix-增强-quicker)
   - [诊断列表 (Trouble)](#诊断列表-trouble)
@@ -411,6 +412,23 @@ nvim-surround 提供了强大的环绕操作功能：
 | `ix` | Operator, Visual | 选中 HTML 属性 (内部)   | `cix` 修改属性值   |
 | `iq` | Operator, Visual | 选中任意引号内容 (内部) | `ciq` 修改引号内容 |
 | `aq` | Operator, Visual | 选中任意引号内容 (外部) | `daq` 删除包括引号 |
+
+---
+
+### Tree-sitter 节点选择
+
+基于 Neovim 0.12 原生增量选择键位，支持 Tree-sitter，缺少 parser 时 `an`/`in` 会回退到 LSP selection range。
+
+| 键位         | 模式             | 功能                 |
+| ------------ | ---------------- | -------------------- |
+| `<leader>vn` | Normal           | 从光标处开始节点选择 |
+| `<CR>`       | Normal           | 从光标处开始节点选择 |
+| `an`         | Operator, Visual | 选择父节点           |
+| `in`         | Operator, Visual | 选择子节点           |
+| `<CR>`       | Visual           | 扩大到父节点         |
+| `<BS>`       | Visual           | 回退到上一层选择     |
+| `]n`         | Visual           | 选择下一个兄弟节点   |
+| `[n`         | Visual           | 选择上一个兄弟节点   |
 
 ---
 

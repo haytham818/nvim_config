@@ -44,7 +44,7 @@
 
 | 插件名称             | 配置文件                              | 仓库链接                                                        | 简介                                              |
 | -------------------- | ------------------------------------- | --------------------------------------------------------------- | ------------------------------------------------- |
-| **Nvim-Treesitter**  | [Config](lua/plugin/treesitter.lua)   | [Github](https://github.com/nvim-treesitter/nvim-treesitter)    | 语法高亮、缩进和增量选择的核心库                  |
+| **Tree-sitter Manager** | [Config](lua/plugin/treesitter.lua)   | [Github](https://github.com/romus204/tree-sitter-manager.nvim) | Tree-sitter parser 管理，配合 Neovim 原生高亮接口 |
 | **Nvim-Autopairs**   | [Config](lua/plugin/autopairs.lua)    | [Github](https://github.com/windwp/nvim-autopairs)              | 自动补全括号和引号                                |
 | **Nvim-TS-Autotag**  | [Config](lua/plugin/autotag.lua)      | [Github](https://github.com/windwp/nvim-ts-autotag)             | 自动闭合和重命名 HTML/XML 标签                    |
 | **Nvim-Surround**    | [Config](lua/plugin/surround.lua)     | [Github](https://github.com/kylechui/nvim-surround)             | 快速修改、添加或删除周围的成对符号                |

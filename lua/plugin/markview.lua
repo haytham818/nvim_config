@@ -3,7 +3,6 @@ return {
 	ft = { "markdown", "norg", "rmd", "org" }, -- 如果你想懒加载，用这个
 
 	dependencies = {
-		"nvim-treesitter/nvim-treesitter",
 		"nvim-tree/nvim-web-devicons",
 	},
 

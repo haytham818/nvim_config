@@ -1,7 +1,5 @@
 return {
-	"nvim-treesitter/nvim-treesitter",
-	branch = "main",
-	build = ":TSUpdate",
+	"romus204/tree-sitter-manager.nvim",
 	lazy = false,
 	config = function()
 		local parsers = {
@@ -81,24 +79,23 @@ return {
 			pcall(vim.treesitter.language.register, parser, ft)
 		end
 
-		require("nvim-treesitter").setup({
-			install_dir = vim.fn.stdpath("data") .. "/site",
-		})
-
-		if vim.fn.executable("tree-sitter") == 1 then
-			require("nvim-treesitter").install(parsers)
-		else
-			vim.notify("tree-sitter CLI not found; nvim-treesitter parsers cannot be installed", vim.log.levels.WARN)
+		local has_tree_sitter_cli = vim.fn.executable("tree-sitter") == 1
+		if not has_tree_sitter_cli then
+			vim.notify("tree-sitter CLI not found; Tree-sitter parsers cannot be installed", vim.log.levels.WARN)
 		end
+
+		require("tree-sitter-manager").setup({
+			ensure_installed = has_tree_sitter_cli and parsers or {},
+			highlight = false,
+			auto_install = false,
+			border = "rounded",
+		})
 
 		local group = vim.api.nvim_create_augroup("UserTreesitter", { clear = true })
 
-		local function parser_installed(lang)
-			return #vim.api.nvim_get_runtime_file("parser/" .. lang .. ".*", false) > 0
-		end
-
-		local function indent_query_installed(lang)
-			return #vim.api.nvim_get_runtime_file("queries/" .. lang .. "/indents.scm", true) > 0
+		local function parser_available(lang)
+			local ok = vim.treesitter.language.add(lang)
+			return ok == true
 		end
 
 		vim.api.nvim_create_autocmd("FileType", {
@@ -112,32 +109,47 @@ return {
 				end
 
 				local lang = vim.treesitter.language.get_lang(args.match) or args.match
-				if not parser_installed(lang) then
+				if not parser_available(lang) then
 					return
 				end
 
-				if pcall(vim.treesitter.start, args.buf, lang) and indent_query_installed(lang) then
-					vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-				end
+				pcall(vim.treesitter.start, args.buf, lang)
 			end,
 		})
 
 		local selections = {}
 
+		local function parse_current_buffer(bufnr)
+			local parser = vim.treesitter.get_parser(bufnr, nil, { error = false })
+			if parser then
+				pcall(parser.parse, parser)
+			end
+		end
+
 		local function set_visual_selection(node)
 			local start_row, start_col, end_row, end_col = node:range()
-			end_col = math.max(end_col - 1, 0)
-			vim.api.nvim_win_set_cursor(0, { start_row + 1, start_col })
-			vim.cmd("normal! v")
-			vim.api.nvim_win_set_cursor(0, { end_row + 1, end_col })
+
+			if end_col == 0 then
+				end_row = end_row - 1
+				end_col = #vim.fn.getline(end_row + 1) + 1
+			end
+
+			vim.cmd.normal({ "v\27", bang = true })
+			vim.fn.setpos("'<", { 0, start_row + 1, start_col + 1, 0 })
+			vim.fn.setpos("'>", { 0, end_row + 1, end_col, 0 })
+			vim.cmd.normal({ "gv", bang = true })
 		end
 
 		local function init_selection()
-			local node = vim.treesitter.get_node()
+			local bufnr = vim.api.nvim_get_current_buf()
+			parse_current_buffer(bufnr)
+
+			local node = vim.treesitter.get_node({ bufnr = bufnr })
 			if not node then
 				return
 			end
-			selections[vim.api.nvim_get_current_buf()] = { node }
+
+			selections[bufnr] = { node }
 			set_visual_selection(node)
 		end
 
@@ -167,9 +179,9 @@ return {
 			set_visual_selection(stack[#stack])
 		end
 
-		vim.keymap.set("n", "<CR>", init_selection, { desc = "Treesitter init selection" })
-		vim.keymap.set("x", "<CR>", increment_selection, { desc = "Treesitter node increment" })
-		vim.keymap.set("x", "<Tab>", increment_selection, { desc = "Treesitter scope increment" })
-		vim.keymap.set("x", "<BS>", decrement_selection, { desc = "Treesitter node decrement" })
+		vim.keymap.set("n", "<leader>vn", init_selection, { desc = "Select Treesitter node" })
+		vim.keymap.set("n", "<CR>", init_selection, { desc = "Select Treesitter node" })
+		vim.keymap.set("x", "<CR>", increment_selection, { desc = "Expand Treesitter selection" })
+		vim.keymap.set("x", "<BS>", decrement_selection, { desc = "Shrink Treesitter selection" })
 	end,
 }
