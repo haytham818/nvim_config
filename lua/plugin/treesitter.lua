@@ -97,6 +97,10 @@ return {
 			return #vim.api.nvim_get_runtime_file("parser/" .. lang .. ".*", false) > 0
 		end
 
+		local function indent_query_installed(lang)
+			return #vim.api.nvim_get_runtime_file("queries/" .. lang .. "/indents.scm", true) > 0
+		end
+
 		vim.api.nvim_create_autocmd("FileType", {
 			group = group,
 			pattern = filetypes,
@@ -112,7 +116,7 @@ return {
 					return
 				end
 
-				if pcall(vim.treesitter.start, args.buf, lang) then
+				if pcall(vim.treesitter.start, args.buf, lang) and indent_query_installed(lang) then
 					vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 				end
 			end,
