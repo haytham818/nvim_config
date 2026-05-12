@@ -257,19 +257,19 @@
 | ------------- | ---------------- | -------------------------- |
 | `]h`          | Normal           | 跳转到下一个 Git hunk      |
 | `[h`          | Normal           | 跳转到上一个 Git hunk      |
-| `<leader>gs`  | Normal, Visual   | Stage 当前/选中 Git hunk   |
-| `<leader>gr`  | Normal, Visual   | Reset 当前/选中 Git hunk   |
-| `<leader>gS`  | Normal           | Stage 当前缓冲区           |
-| `<leader>gR`  | Normal           | Reset 当前缓冲区           |
-| `<leader>gp`  | Normal           | 预览当前 Git hunk          |
-| `<leader>gi`  | Normal           | 内联预览当前 Git hunk      |
-| `<leader>gb`  | Normal           | 显示当前行 blame           |
-| `<leader>gd`  | Normal           | Diff 当前缓冲区            |
-| `<leader>gD`  | Normal           | Diff 当前缓冲区上一版      |
-| `<leader>gq`  | Normal           | 当前缓冲区 hunks 到列表    |
-| `<leader>gQ`  | Normal           | 全仓库 hunks 到列表        |
-| `<leader>gtb` | Normal           | 切换当前行 blame 虚拟文本  |
-| `<leader>gtw` | Normal           | 切换 word diff             |
+| `<leader>hs`  | Normal, Visual   | Stage 当前/选中 Git hunk   |
+| `<leader>hr`  | Normal, Visual   | Reset 当前/选中 Git hunk   |
+| `<leader>hS`  | Normal           | Stage 当前缓冲区           |
+| `<leader>hR`  | Normal           | Reset 当前缓冲区           |
+| `<leader>hp`  | Normal           | 预览当前 Git hunk          |
+| `<leader>hi`  | Normal           | 内联预览当前 Git hunk      |
+| `<leader>hb`  | Normal           | 显示当前行 blame           |
+| `<leader>hd`  | Normal           | Diff 当前缓冲区            |
+| `<leader>hD`  | Normal           | Diff 当前缓冲区上一版      |
+| `<leader>hq`  | Normal           | 当前缓冲区 hunks 到列表    |
+| `<leader>hQ`  | Normal           | 全仓库 hunks 到列表        |
+| `<leader>htb` | Normal           | 切换当前行 blame 虚拟文本  |
+| `<leader>htw` | Normal           | 切换 word diff             |
 | `ih`          | Operator, Visual | 选中当前 Git hunk 文本对象 |
 
 ---

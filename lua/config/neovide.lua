@@ -63,7 +63,7 @@ vim.g.neovide_pixel_geometry = "RGBH"
 -- vim.g.neovide_floating_blur_amount_y = 2.0
 
 -- 悬浮窗阴影总开关
-vim.g.neovide_floating_shadow = true
+vim.g.neovide_floating_shadow = false
 
 -- 悬浮窗高度
 -- vim.g.neovide_floating_z_height = 10
