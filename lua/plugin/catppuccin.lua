@@ -47,7 +47,6 @@ return {
 					indentscope_color = "",
 				},
 				-- 针对你已安装插件的集成
-				oil = true,
 				telescope = true,
 				mason = true,
 				which_key = true,

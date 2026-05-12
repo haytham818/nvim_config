@@ -85,7 +85,7 @@ return {
 					{ "location", separator = { right = "" }, left_padding = 2 }, -- 当前光标位置 (行:列)
 				},
 			},
-			extensions = { "oil", "lazy" },
+			extensions = { "lazy" },
 		}
 	end,
 }

@@ -34,7 +34,7 @@
 | 插件名称           | 配置文件                           | 仓库链接                                                   | 简介                            |
 | ------------------ | ---------------------------------- | ---------------------------------------------------------- | ------------------------------- |
 | **Telescope.nvim** | [Config](lua/plugin/telescope.lua) | [Github](https://github.com/nvim-telescope/telescope.nvim) | 模糊查找器 (文件、文本、Git 等) |
-| **Oil.nvim**       | [Config](lua/plugin/oil.lua)       | [Github](https://github.com/stevearc/oil.nvim)             | 像编辑缓冲区一样管理文件系统    |
+| **mini.files**    | [Config](lua/plugin/minifiles.lua) | [Github](https://github.com/nvim-mini/mini.files)          | 列视图文件管理器，支持预览、Git/LSP 状态与文件操作 |
 | **Flash.nvim**     | [Config](lua/plugin/flash.lua)     | [Github](https://github.com/folke/flash.nvim)              | 跳转插件                        |
 | **Arrow.nvim**     | [Config](lua/plugin/arrow.lua)     | [Github](https://github.com/otavioschwanck/arrow.nvim)     | 书签式文件跳转，支持状态栏显示  |
 | **Grapple.nvim**   | [Config](lua/plugin/grapple.lua)   | [Github](https://github.com/cbochs/grapple.nvim)           | 文件标记与切换工具              |

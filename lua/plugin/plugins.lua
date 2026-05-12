@@ -23,7 +23,7 @@ require("lazy").setup({
 	require("plugin.bufferline"),
 	require("plugin.conform"),
 	require("plugin.lualine"),
-	require("plugin.oil"),
+	require("plugin.minifiles"),
 	require("plugin.treesitter"),
 	require("plugin.noice"),
 	require("plugin.blankline"),

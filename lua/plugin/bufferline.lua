@@ -36,8 +36,8 @@ return {
 			-- 4. 侧边栏偏移配置
 			offsets = {
 				{
-					filetype = "oil",
-					text = "Oil",
+					filetype = "minifiles",
+					text = "MiniFiles",
 					highlight = "Directory",
 					text_align = "left",
 				},
