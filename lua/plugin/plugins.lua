@@ -33,7 +33,6 @@ require("lazy").setup({
 	require("plugin.telescope"),
 	require("plugin.comment"),
 	require("plugin.minialign"),
-	require("plugin.terminal"),
 	require("plugin.surround"),
 	require("plugin.flash"),
 	require("plugin.luasnip"),

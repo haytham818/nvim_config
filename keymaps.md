@@ -11,7 +11,7 @@
   - [模糊查找 (Telescope)](#模糊查找-telescope)
   - [Git 集成 (Neogit)](#git-集成-neogit)
   - [Git Hunk (Gitsigns)](#git-hunk-gitsigns)
-  - [终端 (ToggleTerm)](#终端-toggleterm)
+  - [终端 (内置终端)](#终端-内置终端)
   - [代码格式化 (Conform)](#代码格式化-conform)
   - [注释 (Comment)](#注释-comment)
   - [环绕操作 (Surround)](#环绕操作-surround)
@@ -274,16 +274,17 @@
 
 ---
 
-### 终端 (ToggleTerm)
+### 终端 (内置终端)
 
-| 键位     | 模式     | 功能                   |
-| -------- | -------- | ---------------------- |
-| `Ctrl-\` | Normal   | 切换终端               |
-| `Esc`    | Terminal | 退出终端模式到普通模式 |
-| `Ctrl-h` | Terminal | 切换到左侧窗口         |
-| `Ctrl-j` | Terminal | 切换到下方窗口         |
-| `Ctrl-k` | Terminal | 切换到上方窗口         |
-| `Ctrl-l` | Terminal | 切换到右侧窗口         |
+| 键位     | 模式             | 功能                     |
+| -------- | ---------------- | ------------------------ |
+| `Ctrl-\` | Normal, Insert   | 切换底部终端             |
+| `Ctrl-\` | Terminal         | 切换底部终端             |
+| `S-t`    | Terminal         | 退出终端模式到普通模式   |
+| `Ctrl-h` | Terminal         | 切换到左侧窗口           |
+| `Ctrl-j` | Terminal         | 切换到下方窗口           |
+| `Ctrl-k` | Terminal         | 切换到上方窗口           |
+| `Ctrl-l` | Terminal         | 切换到右侧窗口           |
 
 ---
 

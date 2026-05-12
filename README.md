@@ -62,7 +62,7 @@
 | **Lazy.nvim**        | [Config](lua/plugin/plugins.lua)     | [Github](https://github.com/folke/lazy.nvim)         | 插件管理器               |
 | **Neogit**           | [Config](lua/plugin/neogit.lua)      | [Github](https://github.com/NeogitOrg/neogit)        | Neovim 内 Git 交互界面    |
 | **Gitsigns.nvim**    | [Config](lua/plugin/gitsigns.lua)    | [Github](https://github.com/lewis6991/gitsigns.nvim) | Git hunk、blame 和 diff   |
-| **Toggleterm.nvim**  | [Config](lua/plugin/terminal.lua)    | [Github](https://github.com/akinsho/toggleterm.nvim) | 快速打开/隐藏浮动终端    |
+| **内置终端**         | [Config](lua/config/terminal.lua)    | Neovim 内置 (:terminal)                              | 底部 split 终端切换      |
 | **Persistence.nvim** | [Config](lua/plugin/persistence.lua) | [Github](https://github.com/folke/persistence.nvim)  | 自动保存和恢复编辑会话   |
 
 **其他可选主题 (Installed Themes):**

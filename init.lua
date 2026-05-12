@@ -7,6 +7,7 @@ require("config.options")
 require("config.theme")
 require("plugin.plugins")
 require("config.autocmd")
+require("config.terminal").setup()
 require("lsp")
 
 -- Neovide GUI
