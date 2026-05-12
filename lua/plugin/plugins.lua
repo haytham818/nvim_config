@@ -43,8 +43,6 @@ require("lazy").setup({
 	require("plugin.neogit"),
 	require("plugin.gitsigns"),
 	require("plugin.corn"),
-	require("plugin.focus"),
-	require("plugin.arrow"),
 	require("plugin.dial"),
 	require("plugin.textobjs"),
 	require("plugin.yanky"),
