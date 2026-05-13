@@ -21,10 +21,10 @@ return {
 
 		require("mason-lspconfig").setup({
 			ensure_installed = {
-				"lua_ls", -- Lua
-				"clangd", -- C/C++
-				"taplo", -- TOML
-				"pyright", -- Python
+				"lua_ls",
+				"clangd",
+				"taplo",
+				"pyright",
 			},
 			automatic_enable = false,
 		})

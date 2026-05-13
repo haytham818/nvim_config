@@ -17,14 +17,13 @@ return {
 			},
 
 			sections = {
-				-- 左侧部分
 				lualine_a = {
 					{ "mode", separator = { left = "" }, right_padding = 2 },
 				},
 				lualine_b = {
-					"branch", -- Git 分支
-					"diff", -- Git 差异
-					"diagnostics", -- LSP 诊断信息 (错误、警告数量)
+					"branch",
+					"diff",
+					"diagnostics",
 				},
 				lualine_c = {
 					{
@@ -53,9 +52,8 @@ return {
 						cond = function()
 							return noice_ok and noice.api.status.mode.has()
 						end,
-						color = { fg = "#ff9e64" }, -- 橙色提示
+						color = { fg = "#ff9e64" },
 					},
-					-- Noice 集成：显示搜索计数 (比如 [1/10])
 					{
 						function()
 							return noice.api.status.search.get()
@@ -74,15 +72,15 @@ return {
 						end,
 						color = { fg = "#ff9e46" },
 					},
-					"encoding", -- 文件编码 (utf-8)
-					"fileformat", -- 系统格式 (unix/dos)
-					"filetype", -- 文件类型 (lua, python...)
+					"encoding",
+					"fileformat",
+					"filetype",
 				},
 				lualine_y = {
-					"progress", -- 文件浏览进度百分比
+					"progress",
 				},
 				lualine_z = {
-					{ "location", separator = { right = "" }, left_padding = 2 }, -- 当前光标位置 (行:列)
+					{ "location", separator = { right = "" }, left_padding = 2 },
 				},
 			},
 			extensions = { "lazy" },

@@ -1,6 +1,6 @@
 return {
 	"OXY2DEV/markview.nvim",
-	ft = { "markdown", "norg", "rmd", "org" }, -- 如果你想懒加载，用这个
+	ft = { "markdown", "norg", "rmd", "org" },
 
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
@@ -40,14 +40,12 @@ return {
 				use_virt_lines = true,
 			},
 
-			-- 复选框 [✔] [✘]
 			checkboxes = {
 				enable = true,
 				checked = { icon = "✔" },
 				unchecked = { icon = "✘" },
 			},
 
-			-- 水平分割线 ---
 			horizontal_rules = {
 				enable = true,
 				parts = {
@@ -57,7 +55,6 @@ return {
 		},
 	},
 
-	-- 配置快捷键
 	keys = {
 		{ "<leader>mp", "<cmd>Markview toggle<cr>", desc = "Toggle Markdown Preview" },
 	},
