@@ -1,6 +1,6 @@
 return {
 	"ellisonleao/gruvbox.nvim",
-	priority = 1000, -- 确保最先加载
+	priority = 1000,
 	config = function()
 		require("gruvbox").setup({
 			contrast = "hard",
@@ -9,10 +9,11 @@ return {
 
 			italic = {
 				strings = false,
-				comments = true, -- 注释斜体
+				comments = true,
 				operators = false,
 				folds = true,
 			},
+
 		})
 
 		vim.cmd("colorscheme gruvbox")
