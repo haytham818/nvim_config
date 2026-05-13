@@ -48,4 +48,5 @@ require("lazy").setup({
 	require("plugin.roslyn"),
 	require("plugin.smartsp"),
 	require("plugin.leetcode"),
+	require("plugin.iron"),
 })
