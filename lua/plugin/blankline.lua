@@ -2,21 +2,30 @@ return {
 	"lukas-reineke/indent-blankline.nvim",
 	main = "ibl",
 	event = { "BufReadPost", "BufNewFile" },
+
+	---@module "ibl"
+	---@type ibl.config
 	opts = {
-		-- 1. 缩进线
+		-- 缩进
 		indent = {
-			char = "│", --  "▏" OR "┆")
+			char = "│",
 			tab_char = "│",
+			highlight = "IblIndent",
+			smart_indent_cap = true,
 		},
 
-		-- 2. 当前作用域高亮
 		scope = {
 			enabled = true,
-			show_start = false, -- 是否显示作用域顶部的横线
-			show_end = false, -- 是否显示作用域底部的横线
+			show_start = true,
+			show_end = false,
+			highlight = "IblScope",
 		},
 
-		-- 3. 排除配置
+		whitespace = {
+			highlight = "IblWhiteSpace",
+			remove_blankline_trail = true,
+		},
+
 		exclude = {
 			filetypes = {
 				"help",

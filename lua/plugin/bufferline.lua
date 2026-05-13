@@ -4,7 +4,6 @@ return {
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	event = "VeryLazy",
 
-	-- 快捷键
 	keys = {
 		{ "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "固定/取消固定当前标签" },
 		{ "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "关闭非固定标签" },
@@ -20,20 +19,17 @@ return {
 	opts = {
 		options = {
 			mode = "buffers",
-			-- 分隔符: "slant" | "slope" | "thick" | "thin" | { 'any', 'any' }
 			separator_style = "thin",
 
-			-- LSP
 			diagnostics = "nvim_lsp",
 
 			always_show_bufferline = false,
 
-			diagnostics_indicator = function(count, level, diagnostics_dict, context)
+			diagnostics_indicator = function(count, level, _, _)
 				local icon = level:match("error") and " " or " "
 				return " " .. icon .. count
 			end,
 
-			-- 4. 侧边栏偏移配置
 			offsets = {
 				{
 					filetype = "minifiles",
@@ -43,7 +39,6 @@ return {
 				},
 			},
 
-			-- 5. 交互行为
 			hover = {
 				enabled = true,
 				delay = 200,
