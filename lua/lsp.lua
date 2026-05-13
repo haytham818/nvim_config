@@ -67,4 +67,6 @@ vim.lsp.enable({
 	"pyright",
 	"taplo",
 	"zls",
+	"glsl_analyzer",
+	"hls",
 })

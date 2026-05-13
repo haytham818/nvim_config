@@ -54,17 +54,12 @@ return {
 			-- Sources are configured via the sources.providers table
 		},
 
-		-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
-		-- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
-		-- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
-		--
-		-- See the fuzzy documentation for more information
-		fuzzy = { implementation = "prefer_rust_with_warning" },
+		-- Keep the safer Lua matcher. The Rust matcher was part of the crash path.
+		fuzzy = { implementation = "lua" },
 		completion = {
 			-- The keyword should only match against the text before
 			keyword = { range = "prefix" },
 			menu = {
-				-- Use treesitter to highlight the label text for the given list of sources
 				draw = {
 					treesitter = { "lsp" },
 
@@ -100,6 +95,7 @@ return {
 				-- Show documentation automatically
 				auto_show = true,
 				auto_show_delay_ms = 200,
+				treesitter_highlighting = true,
 				window = {
 					border = "rounded",
 					max_height = 20,
@@ -118,8 +114,41 @@ return {
 			enabled = true,
 			window = {
 				border = "rounded",
+				treesitter_highlighting = true,
 			},
 		},
 	},
 	opts_extend = { "sources.default" },
+	config = function(_, opts)
+		require("blink.cmp").setup(opts)
+
+		local function is_haskell(ft)
+			return ft == "haskell" or ft == "lhaskell"
+		end
+
+		local function sync_popup_treesitter(bufnr)
+			local ft = vim.bo[bufnr or 0].filetype
+			if vim.startswith(ft, "blink-cmp-") then
+				return
+			end
+
+			local cfg = require("blink.cmp.config")
+			local disable = is_haskell(ft)
+			cfg.completion.menu.draw.treesitter = disable and {} or { "lsp" }
+			cfg.completion.documentation.treesitter_highlighting = not disable
+			cfg.signature.window.treesitter_highlighting = not disable
+		end
+
+		local group = vim.api.nvim_create_augroup("UserBlinkCmpTreesitterSafety", { clear = true })
+		vim.api.nvim_create_autocmd({ "BufEnter", "FileType" }, {
+			group = group,
+			callback = function(args)
+				sync_popup_treesitter(args.buf)
+			end,
+		})
+
+		vim.schedule(function()
+			sync_popup_treesitter(vim.api.nvim_get_current_buf())
+		end)
+	end,
 }
