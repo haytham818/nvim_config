@@ -75,35 +75,5 @@ return {
 	opts_extend = { "sources.default" },
 	config = function(_, opts)
 		require("blink.cmp").setup(opts)
-
-		local function is_haskell(ft)
-			return ft == "haskell" or ft == "lhaskell"
-		end
-
-		local function sync_popup_treesitter(bufnr)
-			local ft = vim.bo[bufnr or 0].filetype
-			if vim.startswith(ft, "blink-cmp-") then
-				return
-			end
-
-			local cfg = require("blink.cmp.config")
-			local disable = is_haskell(ft)
-			cfg.completion.menu.draw.treesitter = disable and {} or { "lsp" }
-			cfg.completion.documentation.treesitter_highlighting = not disable
-			cfg.signature.window.treesitter_highlighting = not disable
-		end
-
-		local group = vim.api.nvim_create_augroup("UserBlinkCmpTreesitterSafety", { clear = true })
-
-		vim.api.nvim_create_autocmd({ "BufEnter", "FileType" }, {
-			group = group,
-			callback = function(args)
-				sync_popup_treesitter(args.buf)
-			end,
-		})
-
-		vim.schedule(function()
-			sync_popup_treesitter(vim.api.nvim_get_current_buf())
-		end)
 	end,
 }

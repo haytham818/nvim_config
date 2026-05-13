@@ -50,4 +50,5 @@ require("lazy").setup({
 	require("plugin.leetcode"),
 	require("plugin.iron"),
 	require("plugin.octo"),
+	require("plugin.comment-translate"),
 })

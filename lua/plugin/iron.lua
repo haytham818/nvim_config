@@ -44,7 +44,10 @@ return {
 								table.insert(formatted, "")
 								return formatted
 							end
-							return lines
+							return {
+								lines[1],
+								"",
+							}
 						end,
 					},
 					sh = {
@@ -73,7 +76,7 @@ return {
 					},
 				},
 
-				repl_open_cmd = view.split.vertical.botright(50),
+				repl_open_cmd = view.split.horizontal.botright(15),
 
 				repl_filetype = function(_, ft)
 					return ft

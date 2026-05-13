@@ -32,6 +32,7 @@ return {
 			"git_rebase",
 			"gitcommit",
 			"gitignore",
+			"haskell",
 		}
 
 		local filetypes = {
@@ -65,6 +66,8 @@ return {
 			"gitrebase",
 			"gitcommit",
 			"gitignore",
+			"haskell",
+			"lhaskell",
 		}
 
 		local parser_filetypes = {
@@ -73,6 +76,7 @@ return {
 			git_rebase = "gitrebase",
 			javascript = "javascriptreact",
 			tsx = "typescriptreact",
+			haskell = "lhaskell",
 		}
 
 		for parser, ft in pairs(parser_filetypes) do
@@ -89,6 +93,16 @@ return {
 			highlight = false,
 			auto_install = false,
 			border = "rounded",
+			languages = {
+				-- The revision currently pinned in tree-sitter-manager corrupts memory
+				-- during incremental Haskell edits on Neovim 0.12.2.
+				haskell = {
+					install_info = {
+						url = "https://github.com/tree-sitter/tree-sitter-haskell",
+						revision = "0975ef72fc3c47b530309ca93937d7d143523628",
+					},
+				},
+			},
 		})
 
 		local group = vim.api.nvim_create_augroup("UserTreesitter", { clear = true })

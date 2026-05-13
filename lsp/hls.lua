@@ -20,7 +20,12 @@ return {
 	filetypes = { "haskell", "lhaskell" },
 	root_dir = function(bufnr, on_dir)
 		local fname = vim.api.nvim_buf_get_name(bufnr)
-		on_dir(util.root_pattern("hie.yaml", "stack.yaml", "cabal.project", "*.cabal", "package.yaml")(fname))
+		local root = util.root_pattern("hie.yaml", "cabal.project", "stack.yaml")(fname)
+			or util.root_pattern("*.cabal", "package.yaml")(fname)
+			or vim.fs.dirname(fname)
+			or vim.uv.cwd()
+
+		on_dir(root)
 	end,
 	settings = {
 		haskell = {
