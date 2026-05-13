@@ -370,6 +370,27 @@ local function toggle_working_directory()
 	toggle_explorer(vim.fn.getcwd(), false)
 end
 
+local function escape_minifiles()
+	local mini_files = require("mini.files")
+	local state = mini_files.get_explorer_state()
+	if not state then
+		return
+	end
+
+	local current_dir = state.branch and state.branch[state.depth_focus]
+	if current_dir == nil then
+		mini_files.close()
+		return
+	end
+
+	if trim_trailing_slash(normalize_path(current_dir)) == trim_trailing_slash(normalize_path(vim.fn.getcwd())) then
+		mini_files.close()
+		return
+	end
+
+	mini_files.go_out()
+end
+
 local function open_external()
 	local mini_files = require("mini.files")
 	local fs_entry = mini_files.get_fs_entry()
@@ -523,7 +544,7 @@ return {
 				vim.keymap.set("n", "l", open_entry(true), { buffer = buf_id, desc = "Open entry and close on file" })
 				vim.keymap.set("n", "L", open_entry(false), { buffer = buf_id, desc = "Open entry" })
 				vim.keymap.set("n", "<CR>", open_entry(true), { buffer = buf_id, desc = "Open entry and close on file" })
-				vim.keymap.set("n", "<Esc>", mini_files.close, { buffer = buf_id, desc = "Close explorer" })
+				vim.keymap.set("n", "<Esc>", escape_minifiles, { buffer = buf_id, desc = "Go out or close explorer" })
 				vim.keymap.set("n", "<C-s>", open_in_split("belowright vsplit"), {
 					buffer = buf_id,
 					desc = "Open in vertical split",
