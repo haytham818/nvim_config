@@ -49,4 +49,5 @@ require("lazy").setup({
 	require("plugin.smartsp"),
 	require("plugin.leetcode"),
 	require("plugin.iron"),
+	require("plugin.octo"),
 })
