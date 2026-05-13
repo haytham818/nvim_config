@@ -15,5 +15,6 @@ return {
 			diffview = true,
 			telescope = true,
 		},
+		graph_style = "unicode",
 	},
 }
