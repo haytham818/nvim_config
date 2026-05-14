@@ -1,3 +1,23 @@
+local function get_servers()
+	local servers = {}
+	local lsp_dir = vim.fs.joinpath(vim.fn.stdpath("config"), "lua", "lsp")
+
+	for name, type in vim.fs.dir(lsp_dir) do
+		if type == "file" and name:sub(-4) == ".lua" and name ~= "init.lua" and name:sub(1, 1) ~= "_" then
+			table.insert(servers, name:sub(1, -5))
+		end
+	end
+
+	table.sort(servers)
+	return servers
+end
+
+local servers = get_servers()
+
+for _, server in ipairs(servers) do
+	vim.lsp.config(server, require("lsp." .. server))
+end
+
 -- Remove global default key mappings.
 for _, lhs in ipairs({ "grn", "gra", "grr", "gri", "gO" }) do
 	pcall(vim.keymap.del, "n", lhs)
@@ -58,15 +78,8 @@ vim.diagnostic.config({
 	severity_sort = true, -- Sort diagnostics by severity
 })
 
-vim.lsp.enable({
-	"clangd",
-	"neocmake",
-	"stylua",
-	"rust_analyzer",
-	"lua_ls",
-	"pyright",
-	"taplo",
-	"zls",
-	"glsl_analyzer",
-	"hls",
-})
+vim.lsp.enable(servers)
+
+return {
+	servers = servers,
+}
