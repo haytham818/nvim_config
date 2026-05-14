@@ -1,3 +1,11 @@
+local function open_command_palette()
+	require("telescope.builtin").commands()
+end
+
+local function open_command_history()
+	require("telescope.builtin").command_history()
+end
+
 return {
 	"nvim-telescope/telescope.nvim",
 	cmd = "Telescope",
@@ -7,6 +15,9 @@ return {
 		{ "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Telescope buffers" },
 		{ "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Telescope help tags" },
 		{ "<leader>fp", "<cmd>Telescope projects<cr>", desc = "Telescope projects" },
+		{ "<leader>:", open_command_palette, desc = "Command palette" },
+		{ "<leader>f:", open_command_history, desc = "Command history" },
+		{ "<M-x>", open_command_palette, desc = "Command palette" },
 	},
 	dependencies = {
 		"nvim-lua/plenary.nvim",
@@ -43,6 +54,25 @@ return {
 					height = 0.80,
 				},
 				sorting_strategy = "ascending",
+			},
+			pickers = {
+				commands = {
+					theme = "ivy",
+					previewer = false,
+					initial_mode = "insert",
+					show_buf_command = true,
+					layout_config = {
+						height = 0.35,
+					},
+				},
+				command_history = {
+					theme = "ivy",
+					previewer = false,
+					initial_mode = "insert",
+					layout_config = {
+						height = 0.25,
+					},
+				},
 			},
 			extensions = {
 				["ui-select"] = {
