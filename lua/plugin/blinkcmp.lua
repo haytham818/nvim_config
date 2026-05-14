@@ -99,7 +99,7 @@ return {
 		cmdline = {
 			keymap = {
 				preset = "none",
-				["<Tab>"] = { "show", "accept", "fallback" },
+				["<Tab>"] = { "select_next", "fallback" },
 				["<S-Tab>"] = { "select_prev", "fallback" },
 				["<Up>"] = { "select_prev", "fallback" },
 				["<Down>"] = { "select_next", "fallback" },
@@ -124,8 +124,8 @@ return {
 			completion = {
 				list = {
 					selection = {
-						preselect = true,
-						auto_insert = false,
+						preselect = false,
+						auto_insert = true,
 					},
 				},
 				menu = {

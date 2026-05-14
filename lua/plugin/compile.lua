@@ -8,7 +8,7 @@ return {
 	},
 	config = function()
 		---@type CompileModeOpts
-		vim.g.compilemode = {
+		vim.g.compile_mode = {
 			input_word_completion    = true,
 			baleia                   = true,
 			bang_expansion           = true,

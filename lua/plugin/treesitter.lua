@@ -7,6 +7,7 @@ return {
 			"c",
 			"cpp",
 			"c_sharp",
+			"fsharp",
 			"rust",
 			"lua",
 			"vim",
@@ -41,6 +42,8 @@ return {
 			"c",
 			"cpp",
 			"cs",
+			"fsharp",
+			"fsharp_project",
 			"rust",
 			"lua",
 			"vim",
@@ -77,6 +80,7 @@ return {
 			javascript = "javascriptreact",
 			tsx = "typescriptreact",
 			haskell = "lhaskell",
+			xml = "fsharp_project",
 		}
 
 		for parser, ft in pairs(parser_filetypes) do
@@ -94,6 +98,14 @@ return {
 			auto_install = false,
 			border = "rounded",
 			languages = {
+				fsharp = {
+					install_info = {
+						url = "https://github.com/ionide/tree-sitter-fsharp",
+						branch = "main",
+						files = { "src/scanner.c", "src/parser.c" },
+						location = "fsharp",
+					},
+				},
 				-- The revision currently pinned in tree-sitter-manager corrupts memory
 				-- during incremental Haskell edits on Neovim 0.12.2.
 				haskell = {
