@@ -51,4 +51,5 @@ require("lazy").setup({
 	require("plugin.iron"),
 	require("plugin.octo"),
 	require("plugin.comment-translate"),
+    require("plugin.compile"),
 })
