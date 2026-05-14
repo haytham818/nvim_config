@@ -12,12 +12,9 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({
-	-- require("plugin.monokai"),
-	-- require("plugin.onedarkpro"),
-	require("plugin.gruvbox"),
-	-- require("plugin.gruvboxmat"),
-	-- require("plugin.catppuccin"),
+local plugins = require("plugin.theme")
+
+vim.list_extend(plugins, {
 	require("plugin.mason"),
 	require("plugin.blinkcmp"),
 	require("plugin.bufferline"),
@@ -51,5 +48,7 @@ require("lazy").setup({
 	require("plugin.iron"),
 	require("plugin.octo"),
 	require("plugin.comment-translate"),
-    require("plugin.compile"),
+	require("plugin.compile"),
 })
+
+require("lazy").setup(plugins)
