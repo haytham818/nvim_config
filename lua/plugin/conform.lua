@@ -13,8 +13,8 @@ return {
 					timeout_ms = 3000,
 				})
 			end,
-			mode = { "n", "v" },
-			desc = "Format current buffer",
+			mode = "v",
+			desc = "Format selection",
 		},
 	},
 

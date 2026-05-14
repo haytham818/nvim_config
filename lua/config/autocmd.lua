@@ -59,12 +59,12 @@ vim.api.nvim_create_autocmd({ "FocusLost", "BufLeave" }, {
 	group = save_group,
 	pattern = "*", -- 所有文件
 	callback = function()
-		local has_file = vim.api.nvim_buf_get_name(0) ~= ""
-		if has_file and vim.bo.modified and vim.bo.buftype == "" and vim.bo.modifiable and not vim.bo.readonly then
-			vim.cmd("silent! update")
-		end
+	local has_file = vim.api.nvim_buf_get_name(0) ~= ""
+	if has_file and vim.bo.modified and vim.bo.buftype == "" and vim.bo.modifiable and not vim.bo.readonly then
+		vim.cmd("silent! update")
+	end
 	end,
-	desc = "Auto save on focus loss or buffer leave",
+	   desc = "Auto save on focus loss or buffer leave",
 })
 
 -- 替换启动界面
