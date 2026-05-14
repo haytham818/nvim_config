@@ -30,6 +30,9 @@ vim.opt.incsearch = true -- search as characters are entered
 vim.opt.hlsearch = false -- do not highlight matches
 vim.opt.ignorecase = true -- ignore case in searches by default
 vim.opt.smartcase = true -- but make it case sensitive if an uppercase is entered
+vim.opt.wildmode = "longest:full,full" -- richer command-line completion flow
+vim.opt.wildoptions = "fuzzy,pum" -- native fuzzy matching + popup menu fallback for cmdline
+vim.opt.pumheight = 12 -- keep popup menus compact enough near the bottom cmdline
 
 -- File handling
 vim.opt.undofile = true -- enable persistent undo
