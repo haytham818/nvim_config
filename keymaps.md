@@ -302,10 +302,13 @@
 | 键位         | 模式           | 功能                  |
 | ------------ | -------------- | --------------------- |
 | `<leader>cf` | Visual         | 格式化选中区域         |
+| `<leader>cF` | Normal, Visual | 格式化整个 buffer      |
+
+> 对于不支持选区格式化的语言，`<leader>cf` 会提示改用 `<leader>cF`。
 
 **命令**:
 
-- `:FormatToggle` - 切换保存时自动格式化
+- `:ConformInfo` - 显示格式化工具信息
 
 ---
 
@@ -759,7 +762,6 @@ nvim-surround 提供了强大的环绕操作功能：
 
 ### 其他有用命令
 
-- `:FormatToggle` - 切换保存时自动格式化
 - `:ConformInfo` - 显示格式化工具信息
 - `:Neotree` - 打开文件树
 - `:Neogit` - 打开 Neogit
