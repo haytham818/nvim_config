@@ -138,6 +138,14 @@ return {
 		require("roslyn").setup(opts)
 
 		vim.lsp.config("roslyn", {
+			-- roslyn.nvim 的 get_roslyn_lsp_path() 只查找 `roslyn-language-server`,
+			-- 但 mason 装的是 `roslyn` 包(二进制名 `roslyn`),fallback 值
+			-- `Microsoft.CodeAnalysis.LanguageServer` 不可执行导致启动失败,
+			-- 因此这里显式指定 cmd。
+			cmd = {
+				vim.fs.joinpath(vim.fn.stdpath("data"), "mason", "bin", "roslyn"),
+				"--stdio",
+			},
 			capabilities = {
 				textDocument = {
 					diagnostic = {
